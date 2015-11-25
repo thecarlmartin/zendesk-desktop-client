@@ -9,6 +9,10 @@ html {
   background: radial-gradient(circle farthest-corner at 0% 0% , #83D0D7 0%, #4A90E2 100%);
 }
 
+body {
+  height: 100%;
+}
+
 a:hover {
     -webkit-filter: drop-shadow(1px 1px 4px rgba(0, 0, 0, 0.3) );
 }
@@ -18,13 +22,15 @@ h1 {
   font-weight: 400;
   font-size: 2em;
   color: #757575;
+  margin: 0;
 }
 
 p {
   font-family: 'Open Sans', sans-serif;
   font-weight: 400;
-  font-size: 0.8em;
+  font-size: 0.9em;
   color: #A1A1A1;
+  margin: 0;
 }
 
 /* CHANGING PLACEHOLDER TEXT FOR ALL BROWSERS */
@@ -102,60 +108,53 @@ LOGIN
 .login {
   width: 300px;
   height: auto;
+  padding: 25px;
   margin: auto;
-  margin-top: 40%;
+  border-radius: 8px;
   background: white;
   box-shadow: 0px 1px 4px 0px rgba(0,0,0,0.20);
-  border-radius: 8px;
-  padding: 2%;
 }
 
-.login h1 {
-  margin-top: 0;
-}
-
-.login p {
-  margin-top: -15px;
-}
-
-#subdomain {
-  margin-top: 5%;
+#subdomain-textabove {
+  margin-top: 15px;
+  font-size: 0.8em;
 }
 
 #subdomain-field {
-  width: 100%;
+  //Deleteing OS Form styles
   background:rgba(0, 0, 0, 0);
+  border: none;
+  margin: 0;
+  padding: 0;
+
+  //Adding custom styling
+  height: 1em;
+  width: 200px;
   font-family: 'Open Sans', sans-serif;
   font-weight: 400;
   font-size: 0.875em;
   color: #A1A1A1;
-  border: none;
-  border-bottom: 0.1em solid #A1A1A1;
-  margin-top: 0;
-  padding-left: 0;
-}
-
-.login form p {
-  margin-bottom: 0;
-  margin-top: auto;
-  font-size: 0.7em;
-}
-
-#login-bottom {
-  margin-top: 15px;
-  height: 35px;
-}
-
-#checkbox {
-  margin-top: 20px;
   float: left;
+  border-bottom: 0.1em solid #A1A1A1;
 }
 
-#checkbox p {
-  display: inline;
+#subdomain-completion {
+  font-size: 0.875em;
+  height: 1em;
+  float: right;
 }
 
-button {
+.login form div {
+  margin-top: 44px;
+  display: inline-block;
+}
+
+.login form div p {
+    display: inline;
+}
+
+.login form button {
+  margin-top: 25px;
   float: right;
   padding: 10px;
   border: none;

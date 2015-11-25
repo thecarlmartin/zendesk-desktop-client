@@ -28,12 +28,14 @@ function insertAtCursor(myField, myValue) {
 
 $(document).ready(function() {
 
+  //Display login Window
+  localStorage.removeItem('code');
+
   console.log(localStorage.getItem('code'))
   if (localStorage.getItem('code') === null || localStorage.getItem('code') === 'undefined' || localStorage.getItem('code') === ''){
     // Hide UI, if User is not logged in.
     $('.search-feature, .header-main').hide();
    } else {
-    localStorage.getItem('code') === null
     $('.login').hide();
    }
 
