@@ -1,4 +1,5 @@
-function setFormText(id, add,text) {
+//Document Functions
+function setFormText(id, add, text) {
   var selectedForm = document.getElementById(id);
   if (add === 'add') {
     selectedForm.value = selectedForm.value + text;
@@ -7,25 +8,11 @@ function setFormText(id, add,text) {
   }
 }
 
-function insertAtCursor(myField, myValue) {
-    //IE support
-    if (document.selection) {
-        myField.focus();
-        sel = document.selection.createRange();
-        sel.text = myValue;
-    }
-    //MOZILLA and others
-    else if (myField.selectionStart || myField.selectionStart == '0') {
-        var startPos = myField.selectionStart;
-        var endPos = myField.selectionEnd;
-        myField.value = myField.value.substring(0, startPos)
-            + myValue
-            + myField.value.substring(endPos, myField.value.length);
-    } else {
-        myField.value += myValue;
-    }
+function changeTextColor(id, color) {
+  document.getElementById(id).style.color = color;
 }
 
+//When document is loaded
 $(document).ready(function() {
 
   //Display login Window
@@ -40,29 +27,32 @@ $(document).ready(function() {
    }
 
   // Login Form activity
-  setFormText("subdomain-field", 'add', 'beispiel.zendesk.com');
+  setFormText("subdomain-field", 'add', 'beispiel');
 
   $('#subdomain-field').focus(function(){
     //Setting the elements to blue to indicate focus
-    document.getElementById("subdomain-description").style.color = "#4A90E2";
-    document.getElementById("subdomain-field").style.color = "#4A90E2";
+    changeTextColor("subdomain-textabove", "#4A90E2");
+    changeTextColor("subdomain-field", "#4A90E2");
+    changeTextColor("subdomain-completion", "#4A90E2");
     document.getElementById("subdomain-field").style.borderBottom = "0.1em solid #4A90E2";
 
     //Remove placeholder text, if applicable
-    if (document.getElementById("subdomain-field").value === 'beispiel.zendesk.com') {
+    if (document.getElementById("subdomain-field").value === 'beispiel') {
+
       setFormText("subdomain-field", '', '');
     }
   });
 
   $('#subdomain-field').blur(function(){
     //Changing the elements back to normal color to communicate end focus
-    document.getElementById("subdomain-description").style.color = "#A1A1A1";
-    document.getElementById("subdomain-field").style.color = "#A1A1A1";
+    changeTextColor("subdomain-textabove", "#A1A1A1");
+    changeTextColor("subdomain-field", "#A1A1A1");
+    changeTextColor("subdomain-completion", "#A1A1A1");
     document.getElementById("subdomain-field").style.borderBottom = "0.1em solid #A1A1A1";
 
     //Check if user entered domain, otherwise fill in placeholder text
     if (document.getElementById("subdomain-field").value === '') {
-      setFormText("subdomain-field", 'add', 'beispiel.zendesk.com');
+      setFormText("subdomain-field", 'add', 'beispiel');
     }
 
     //Listen for Enter key in search box

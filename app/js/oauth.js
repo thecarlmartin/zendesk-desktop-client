@@ -1,3 +1,15 @@
+//Document Functions
+function removeCookie(window, cookie) {
+    var url = "http" + (cookie.secure ? "s" : "") + "://" + cookie.domain + cookie.path;
+    window.webContents.session.cookies.remove({
+            "url": url,
+            "name": cookie.name
+        },
+        function(error) {
+            if (error) throw error;
+        });
+}
+
 //Require Browser Module
 var remote = require('remote');
 var BrowserWindow = remote.require('browser-window');
@@ -12,21 +24,28 @@ var options = {
 
 function zendeskOAuth() {
 
-  if(document.getElementById("subdomain-field").value === '' || document.getElementById("subdomain-field").value === 'beispiel.zendesk.com') {
+  if(document.getElementById("subdomain-field").value === '' || document.getElementById("subdomain-field").value === 'beispiel') {
     return;
   } else {
     var zendeskSubdomain = document.getElementById("subdomain-field").value;
   }
 
   // Build the OAuth consent page URL
-  //Test new Window function
   var authWindow = new BrowserWindow({
       height: 800,
       width: 600,
-      show: false
+      show: false,
+      alwaysOnTop: true
   });
-  var zendeskURL = 'https://' + zendeskSubdomain + '/oauth/authorizations/';
-  var authUrl = zendeskURL + 'new?response_type=code&redirect_uri=' + options.redirectURI + '&client_id=' + options.client_id + '&scope=' + options.scope
+  var zendeskURL = 'https://' + zendeskSubdomain + '.zendesk.com/oauth/authorizations/';
+  var authUrl = zendeskURL + 'new?response_type=code&redirect_uri=' + options.redirectURI + '&client_id=' + options.client_id + '&scope=' + options.scope;
+  //Remove Zendesk Cookies
+  authWindow.webContents.session.cookies.get({}, function(error, cookies) {
+    if (error) throw error;
+    for (var i = cookies.length - 1; i >= 0; i--) {
+        removeCookie(authWindow, cookies[i])
+    };
+  });
   authWindow.loadUrl(authUrl);
   authWindow.show();
 
@@ -41,8 +60,6 @@ function zendeskOAuth() {
       // Close the browser if code found or error
       authWindow.close();
     }
-
-    console.log(code)
 
     // If there is a code in the callback, proceed to get token from Zendesk
     if (code) {
@@ -62,7 +79,7 @@ function zendeskOAuth() {
 function requestZendeskToken(zendeskOptions, authCode) {
   var tokenExchange = new XMLHttpRequest();
   var zendeskSubdomain = document.getElementById("subdomain-field").value;
-  var tokenURL = 'https://' + zendeskSubdomain + '/oauth/tokens'
+  var tokenURL = 'https://' + zendeskSubdomain + '.zendesk.com/oauth/tokens';
   var tokenOptions = JSON.stringify({
     grant_type: 'authorization_code',
     code: authCode,
@@ -75,13 +92,12 @@ function requestZendeskToken(zendeskOptions, authCode) {
   tokenExchange.onreadystatechange = function() {
     if (tokenExchange.readyState == 4 && tokenExchange.status == 200) {
       var response = JSON.parse(tokenExchange.responseText);
-      localStorage.setItem('code', response.access_token)
+      localStorage.setItem('code', response.access_token);
       console.log('Access Token: ' + response.access_token);
     }
   };
 
   tokenExchange.open('POST', tokenURL, true);
   tokenExchange.setRequestHeader("Content-Type", "application/json");
-  console.log(tokenExchange);
   tokenExchange.send(tokenOptions);
 }
