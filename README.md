@@ -1,4 +1,4 @@
-# ZendeskDekstopSupport
+# ZendeskDesktopSupport
 I'm developing this app to learn JavaScript.
 I'm building this app on top of the electron framework.
 
