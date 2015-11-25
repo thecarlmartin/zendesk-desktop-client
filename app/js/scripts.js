@@ -61,6 +61,11 @@ $(document).ready(function() {
     if (document.getElementById("subdomain-field").value === '') {
       setFormText("subdomain-field", 'add', 'beispiel.zendesk.com');
     }
+
+    //Listen for Enter key in search box
+    $('#search-box').bind('enterKey', function(e) {
+      startSearch();
+    });
   });
 
 
