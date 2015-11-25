@@ -61,24 +61,35 @@ function zendeskOAuth() {
 }
 
 function requestZendeskToken(zendeskOptions, authCode) {
+  var tokenExchange = new XMLHttpRequest();
   var zendeskSubdomain = document.getElementById("subdomain-field").value;
-  var tokenURL = 'https://' + zendeskSubdomain + '/oauth/tokens/application/json/'
-  var tokenOptions = {
+  var tokenURL = 'https://' + zendeskSubdomain + '/oauth/tokens'
+  var tokenOptions = JSON.stringify({
     grant_type: 'authorization_code',
     code: authCode,
     client_id: zendeskOptions.client_id,
     client_secret: zendeskOptions.client_secret,
     redirect_uri: zendeskOptions.redirectURI,
     scope: 'read'
-  }
+  });
 
-  console.log(tokenOptions);
-
-  function saveToken(data) {
-      var token = data.access_token;
-      console.log(token);
+  tokenExchange.onreadystatechange = function() {
+    if (tokenExchange.readyState == 4 && tokenExchange.status == 200) {
+      // var token = data.access_token;
+      console.log(tokenExchange.responseXML);
     }
-    $.getJSON(tokenURL, tokenOptions, saveToken);
+  };
+
+  tokenExchange.open('POST', tokenURL, true);
+  tokenExchange.setRequestHeader("Content-Type", "application/json");
+  console.log(tokenExchange);
+  tokenExchange.send(tokenOptions);
+
+  // function saveToken(data) {
+  //     var token = data.access_token;
+  //     console.log(token);
+  // }
+  // $.getJSON(tokenURL, tokenOptions, saveToken);
 }
 
 // requestGithubToken: function (options, code) {
