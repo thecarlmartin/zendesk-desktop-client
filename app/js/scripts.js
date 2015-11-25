@@ -33,6 +33,7 @@ $(document).ready(function() {
     // Hide UI, if User is not logged in.
     $('.search-feature, .header-main').hide();
    } else {
+    localStorage.getItem('code') === null
     $('.login').hide();
    }
 
