@@ -57,7 +57,6 @@ function zendeskOAuth() {
   authWindow.on('close', function() {
       authWindow = null;
   }, false);
-
 }
 
 function requestZendeskToken(zendeskOptions, authCode) {
@@ -75,8 +74,9 @@ function requestZendeskToken(zendeskOptions, authCode) {
 
   tokenExchange.onreadystatechange = function() {
     if (tokenExchange.readyState == 4 && tokenExchange.status == 200) {
-      // var token = data.access_token;
-      console.log(tokenExchange.responseXML);
+      var response = JSON.parse(tokenExchange.responseText);
+      localStorage.setItem('code', response.access_token)
+      console.log('Access Token: ' + response.access_token);
     }
   };
 
@@ -84,32 +84,4 @@ function requestZendeskToken(zendeskOptions, authCode) {
   tokenExchange.setRequestHeader("Content-Type", "application/json");
   console.log(tokenExchange);
   tokenExchange.send(tokenOptions);
-
-  // function saveToken(data) {
-  //     var token = data.access_token;
-  //     console.log(token);
-  // }
-  // $.getJSON(tokenURL, tokenOptions, saveToken);
 }
-
-// requestGithubToken: function (options, code) {
-//
-//   apiRequests
-//     .post('https://github.com/login/oauth/access_token', {
-//       client_id: options.client_id,
-//       client_secret: options.client_secret,
-//       code: code,
-//     })
-//     .end(function (err, response) {
-//       if (response && response.ok) {
-//         // Success - Received Token.
-//         // Store it in localStorage maybe?
-//         localStorage.setItem('code', response.body.access_token)
-//         window.localStorage.setItem('githubtoken', response.body.access_token);
-//       } else {
-//         // Error - Show messages.
-//         console.log(err);
-//       }
-//     });
-//
-// }
