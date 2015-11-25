@@ -5,8 +5,9 @@
     <link rel="stylesheet" href="css/main.css">
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
     <script src="js/scripts.js"></script>
+    <script src="js/oauth.js"></script>
   </head>
-  <body>
+  <body class="main">
     <header>
       <ul class="header-main">
         <li><a href="index.html" alt="Home"><img src="img/home-icon.svg" alt="Go Home" id="home"></a></li>
@@ -16,10 +17,27 @@
     </header>
     <div class="search-feature">
       <img src="img/help-icon.svg" alt="help-icon" class="retina" id="help-icon">
-      <form onsubmit="return false;">
+      <form onsubmit="startSearch()">
         <input type="text" name="problem-description" placeholder="Geben Sie Ihre Frage hier ein." id="search-box">
       </form>
       <a alt="Start Search" onclick="startSearch()"><img src="img/arrow-right.svg" alt="Start Search" id="search-arrow"></a>
+    </div>
+    <div class="login" onsubmit="zendeskOAuth();">
+      <h1>Willkommen</h1>
+      <p>Damit wir Ihnen schneller helfen können, müssen Sie sich anmelden. Geben Sie dazu die Zendesk Subdomain ein.</p>
+      <form>
+        <div id='subdomain'>
+          <p id="subdomain-description">Zendesk Domain:</p>
+          <input type="text" placeholder="beispiel.zendesk.com" id="subdomain-field">
+        </div>
+        <div id="login-bottom">
+          <div id="checkbox">
+            <input type="checkbox" name="stay-signed-in" value="Angemeldet bleiben">
+            <p>Angemeldet bleiben</p>
+          </div>
+          <button type="submit" name="submit" value="Anmelden">Anmelden</>
+        </div>
+      </form>
     </div>
   </body>
 

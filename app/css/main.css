@@ -1,13 +1,57 @@
+@import url(https://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700);
+
 /*****************
 GENERAL
 ******************/
+
 html {
   height: 100%;
-  background: radial-gradient(circle farthest-corner at 0% 0% , #83D0D7 0%, #4A90E2 100%);
+  /*background: radial-gradient(circle farthest-corner at 0% 0% , #83D0D7 0%, #4A90E2 100%);*/
 }
 
 a:hover {
     -webkit-filter: drop-shadow(1px 1px 4px rgba(0, 0, 0, 0.3) );
+}
+
+h1 {
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 400;
+  font-size: 2em;
+  color: #757575;
+}
+
+p {
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 400;
+  font-size: 0.8em;
+  color: #A1A1A1;
+}
+
+/* CHANGING PLACEHOLDER TEXT FOR ALL BROWSERS */
+::-webkit-input-placeholder { /* WebKit, Blink, Edge */
+    color:    #FFF;
+}
+:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+   color:    #FFF;
+   opacity:  1;
+}
+/*::-moz-placeholder { /* Mozilla Firefox 19+ */*/
+   color:    #FFF;
+   opacity:  1;
+}
+:-ms-input-placeholder { /* Internet Explorer 10-11 */
+   color:    #FFF;
+}
+
+input[type=text], textarea {
+  -webkit-transition: all 0.15s ease-in-out;
+  -moz-transition: all 0.15s ease-in-out;
+  -ms-transition: all 0.15s ease-in-out;
+  -o-transition: all 0.15s ease-in-out;
+  outline: none;
+  padding: 3px 0px 3px 3px;
+  margin: 5px 1px 3px 0px;
+  border: 1px solid #DDDDDD;
 }
 
 /*****************
@@ -52,12 +96,85 @@ HEADER
 }
 
 /*****************
+LOGIN
+******************/
+
+.login {
+  width: 300px;
+  height: auto;
+  margin: auto;
+  margin-top: 40%;
+  background: white;
+  box-shadow: 0px 1px 4px 0px rgba(0,0,0,0.20);
+  border-radius: 8px;
+  padding: 2%;
+}
+
+.login h1 {
+  margin-top: 0;
+}
+
+.login p {
+  margin-top: -15px;
+}
+
+#subdomain {
+  margin-top: 5%;
+}
+
+#subdomain-field {
+  width: 100%;
+  background:rgba(0, 0, 0, 0);
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 400;
+  font-size: 0.875em;
+  color: #A1A1A1;
+  border: none;
+  border-bottom: 0.1em solid #A1A1A1;
+  margin-top: 0;
+  padding-left: 0;
+}
+
+.login form p {
+  margin-bottom: 0;
+  margin-top: auto;
+  font-size: 0.7em;
+}
+
+#login-bottom {
+  margin-top: 15px;
+  height: 35px;
+}
+
+#checkbox {
+  margin-top: 20px;
+  float: left;
+}
+
+#checkbox p {
+  display: inline;
+}
+
+button {
+  float: right;
+  padding: 10px;
+  border: none;
+  text-decoration:none;
+  background: #4A90E2;
+  border-radius: 4px;
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 400;
+  font-size: 0.875em;
+  color: #FFFFFF;
+}
+
+/*****************
 SEARCH
 ******************/
 
 #help-icon {
   position: fixed;
-  top: 46.5%;
+  top: 47.5%;
   left: 10%;
   padding-top: 0.5%;
   height: 3.5vw;
@@ -73,7 +190,7 @@ SEARCH
   left: 15%;
   width: 73%;
   background:rgba(0, 0, 0, 0);
-  font-family: sans-serif;
+  font-family: 'Open Sans', sans-serif;
   font-size: 3vw;
   color: #FFF;
   border: none;
@@ -82,38 +199,11 @@ SEARCH
 
 #search-arrow {
   position: fixed;
-  top: 46%;
+  top: 47%;
   left: 89%;
   float: right;
   width: 3.5vw;
   height: 3.5vw;
   padding: 1% 1% 1% 1%;
 
-}
-
-/* CHANGING PLACEHOLDER TEXT FOR ALL BROWSERS */
-::-webkit-input-placeholder { /* WebKit, Blink, Edge */
-    color:    #FFF;
-}
-:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
-   color:    #FFF;
-   opacity:  1;
-}
-::-moz-placeholder { /* Mozilla Firefox 19+ */
-   color:    #FFF;
-   opacity:  1;
-}
-:-ms-input-placeholder { /* Internet Explorer 10-11 */
-   color:    #FFF;
-}
-
-input[type=text], textarea {
-  -webkit-transition: all 0.15s ease-in-out;
-  -moz-transition: all 0.15s ease-in-out;
-  -ms-transition: all 0.15s ease-in-out;
-  -o-transition: all 0.15s ease-in-out;
-  outline: none;
-  padding: 3px 0px 3px 3px;
-  margin: 5px 1px 3px 0px;
-  border: 1px solid #DDDDDD;
 }

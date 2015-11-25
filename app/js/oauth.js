@@ -2,7 +2,7 @@
 var options = {
     client_id: 'desktop_support',
     client_secret: 'cd4669093075abdce1bd997953983885a75b8a9d35eb44d22179f6e304a9ceb5',
-    scopes: ["read%20write"] // Scopes limit access for OAuth tokens.
+    scopes: ["read%20write"], // Scopes limit access for OAuth tokens.
     redirectURI: 'https://physiotherapiemartin.de'
 };
 
@@ -14,13 +14,12 @@ function zendeskOAuth() {
 
   // Build the OAuth consent page URL
   var authWindow = newWindow(800, 600, false);
-
   var zendeskURL = 'https://' + document.getElementById("subdomain-field").value + '/oauth/authorizations/new';
   var authUrl = zendeskURL + 'new?response_type=code&redirect_uri=' + options.redirectURI + '&client_id=' + options.client_id + '&scope=' + options.scope
   authWindow.loadUrl(authUrl);
   authWindow.show();
 
-  // Handle the response from GitHub
+  // Handle the response from Zendesk
   authWindow.webContents.on('did-get-redirect-request', function(event, oldUrl, newUrl) {
 
     var raw_code = /code=([^&]*)/.exec(newUrl) || null,
@@ -32,7 +31,7 @@ function zendeskOAuth() {
       authWindow.close();
     }
 
-    // If there is a code in the callback, proceed to get token from github
+    // If there is a code in the callback, proceed to get token from Zendesk
     if (code) {
       requestGithubToken(options, code);
     } else if (error) {
@@ -60,6 +59,7 @@ function zendeskOAuth() {
 //       if (response && response.ok) {
 //         // Success - Received Token.
 //         // Store it in localStorage maybe?
+//         localStorage.setItem('code', response.body.access_token)
 //         window.localStorage.setItem('githubtoken', response.body.access_token);
 //       } else {
 //         // Error - Show messages.
