@@ -1,8 +1,12 @@
+//Require Browser Module
+var remote = require('remote');
+var BrowserWindow = remote.require('browser-window');
+
 // Zendesk Application credentials
 var options = {
     client_id: 'desktop_support',
     client_secret: 'cd4669093075abdce1bd997953983885a75b8a9d35eb44d22179f6e304a9ceb5',
-    scopes: ["read%20write"], // Scopes limit access for OAuth tokens.
+    scope: "read%20write", // Scopes limit access for OAuth tokens.
     redirectURI: 'https://physiotherapiemartin.de'
 };
 
@@ -10,11 +14,18 @@ function zendeskOAuth() {
 
   if(document.getElementById("subdomain-field").value === '' || document.getElementById("subdomain-field").value === 'beispiel.zendesk.com') {
     return;
+  } else {
+    var zendeskSubdomain = document.getElementById("subdomain-field").value;
   }
 
   // Build the OAuth consent page URL
-  var authWindow = newWindow(800, 600, false);
-  var zendeskURL = 'https://' + document.getElementById("subdomain-field").value + '/oauth/authorizations/new';
+  //Test new Window function
+  var authWindow = new BrowserWindow({
+      height: 800,
+      width: 600,
+      show: false
+  });
+  var zendeskURL = 'https://' + zendeskSubdomain + '/oauth/authorizations/';
   var authUrl = zendeskURL + 'new?response_type=code&redirect_uri=' + options.redirectURI + '&client_id=' + options.client_id + '&scope=' + options.scope
   authWindow.loadUrl(authUrl);
   authWindow.show();
@@ -31,11 +42,13 @@ function zendeskOAuth() {
       authWindow.close();
     }
 
+    console.log(code)
+
     // If there is a code in the callback, proceed to get token from Zendesk
     if (code) {
-      requestGithubToken(options, code);
+      requestZendeskToken(options, code);
     } else if (error) {
-      alert("Oops! Something went wrong and we couldn't log you in using Github. Please try again.");
+      alert("Leider ist ein Fehler aufgetreten. Wir konnten Sie deshalb nicht mit Zendesk anmelden. Bitte versuchen Sie es erneut oder kontaktieren Sie Ihren Administrator.");
     }
 
   });
@@ -45,6 +58,27 @@ function zendeskOAuth() {
       authWindow = null;
   }, false);
 
+}
+
+function requestZendeskToken(zendeskOptions, authCode) {
+  var zendeskSubdomain = document.getElementById("subdomain-field").value;
+  var tokenURL = 'https://' + zendeskSubdomain + '/oauth/tokens/application/json/'
+  var tokenOptions = {
+    grant_type: 'authorization_code',
+    code: authCode,
+    client_id: zendeskOptions.client_id,
+    client_secret: zendeskOptions.client_secret,
+    redirect_uri: zendeskOptions.redirectURI,
+    scope: 'read'
+  }
+
+  console.log(tokenOptions);
+
+  function saveToken(data) {
+      var token = data.access_token;
+      console.log(token);
+    }
+    $.getJSON(tokenURL, tokenOptions, saveToken);
 }
 
 // requestGithubToken: function (options, code) {

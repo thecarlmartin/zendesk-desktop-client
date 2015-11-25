@@ -45,21 +45,6 @@ $(document).ready(function() {
     document.getElementById("subdomain-field").style.color = "#4A90E2";
     document.getElementById("subdomain-field").style.borderBottom = "0.1em solid #4A90E2";
 
-    //Test new Window function
-    var BrowserWindow = require('electron').BrowserWindow;
-    var testWindow = new BrowserWindow({
-        height: 600,
-        width: 1400
-    });
-    // app.on('ready', function() {
-    //     mainWindow = new BrowserWindow({
-    //         height: 600,
-    //         width: 1400
-    //     });
-    //     mainWindow.loadURL('file://' + __dirname + '/app/index.html');
-    //     mainWindow.openDevTools();
-    // });
-
     //Remove placeholder text, if applicable
     if (document.getElementById("subdomain-field").value === 'beispiel.zendesk.com') {
       setFormText("subdomain-field", '', '');

@@ -6,7 +6,7 @@ GENERAL
 
 html {
   height: 100%;
-  /*background: radial-gradient(circle farthest-corner at 0% 0% , #83D0D7 0%, #4A90E2 100%);*/
+  background: radial-gradient(circle farthest-corner at 0% 0% , #83D0D7 0%, #4A90E2 100%);
 }
 
 a:hover {

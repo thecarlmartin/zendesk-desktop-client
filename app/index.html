@@ -22,7 +22,7 @@
       </form>
       <a alt="Start Search" onclick="startSearch()"><img src="img/arrow-right.svg" alt="Start Search" id="search-arrow"></a>
     </div>
-    <div class="login" onsubmit="zendeskOAuth();">
+    <div class="login">
       <h1>Willkommen</h1>
       <p>Damit wir Ihnen schneller helfen können, müssen Sie sich anmelden. Geben Sie dazu die Zendesk Subdomain ein.</p>
       <form>
@@ -35,7 +35,7 @@
             <input type="checkbox" name="stay-signed-in" value="Angemeldet bleiben">
             <p>Angemeldet bleiben</p>
           </div>
-          <button type="submit" name="submit" value="Anmelden">Anmelden</>
+          <button type="button" onclick="zendeskOAuth();" name="submit" value="Anmelden">Anmelden</>
         </div>
       </form>
     </div>
