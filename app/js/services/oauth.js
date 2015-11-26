@@ -14,21 +14,27 @@ function removeCookie(window, cookie) {
 var remote = require('remote');
 var BrowserWindow = remote.require('browser-window');
 
-// Zendesk Application credentials
-var options = {
-    client_id: 'desktop_support',
-    client_secret: 'cd4669093075abdce1bd997953983885a75b8a9d35eb44d22179f6e304a9ceb5',
-    scope: "read%20write", // Scopes limit access for OAuth tokens.
-    redirectURI: 'https://physiotherapiemartin.de'
-};
-
 function zendeskOAuth() {
 
+  // Zendesk Application credentials
+  var options = {
+      client_id: 'desktop_support',
+      client_secret: 'cd4669093075abdce1bd997953983885a75b8a9d35eb44d22179f6e304a9ceb5',
+      scope: "read%20write", // Scopes limit access for OAuth tokens.
+      redirectURI: 'https://physiotherapiemartin.de'
+  };
+
+  //Check that a Zendesk Subdomain has been entered.
   if(document.getElementById("subdomain-field").value === '' || document.getElementById("subdomain-field").value === 'beispiel') {
     return;
   } else {
     var zendeskSubdomain = document.getElementById("subdomain-field").value;
   }
+
+  //Store value of Signed in Checkbox
+  var staySignedInDecision = document.getElementById("staySignedIn").checked;
+  localStorage.setItem('staySignedIn', staySignedInDecision);
+  console.log('Stay Signed in: ' + localStorage.getItem('staySignedIn'));
 
   // Build the OAuth consent page URL
   var authWindow = new BrowserWindow({
@@ -100,4 +106,5 @@ function requestZendeskToken(zendeskOptions, authCode) {
   tokenExchange.open('POST', tokenURL, true);
   tokenExchange.setRequestHeader("Content-Type", "application/json");
   tokenExchange.send(tokenOptions);
+  initiateViews();
 }

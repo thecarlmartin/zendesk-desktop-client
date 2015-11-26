@@ -103,6 +103,20 @@ HEADER
 }
 
 /*****************
+FOOTER
+******************/
+.footer a {
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 300;
+  font-size: 0.9em;
+  text-decoration: none;
+  color: #FFF;
+  position: absolute;
+  bottom: 5px;
+  right: 5px;
+}
+
+/*****************
 LOGIN
 ******************/
 
@@ -192,7 +206,6 @@ SEARCH
   position: fixed;
   top: 47.5%;
   left: 10%;
-  padding-top: 0.5%;
   height: 3.5vw;
   width: 3.5vw;
   -ms-transform: rotate(45deg); /* IE 9 */
