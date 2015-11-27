@@ -12,7 +12,6 @@ $(document).ready(function() {
 
     //Remove placeholder text, if applicable
     if (document.getElementById("subdomain-field").value === 'beispiel') {
-
       setFormText("subdomain-field", '', '');
     }
   });

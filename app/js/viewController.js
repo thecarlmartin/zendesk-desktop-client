@@ -1,19 +1,31 @@
 $(document).ready(function() {
   //Hiding UI on start
-  $('.search-feature, .header-main, .login').hide();
+  $('.search-feature, .header, .login, .loading, .footer').hide();
+  if(localStorage.getItem('staySignedIn') !== 'true') {
+    localStorage.removeItem('code');
+    localStorage.removeItem('staySignedIn');
+  }
   initiateViews();
 });
 
 function initiateViews() {
-  var oAuthToken = localStorage.getItem('code');
-  console.log(oAuthToken);
+  $('.search-feature, .header, .login, .loading, .footer').hide();
+  console.log(localStorage.getItem('code'));
 
-  if(oAuthToken != null) {
-    $('.login').fadeOut();
-    $('.search-feature, .header-main').fadeIn();
+  if(localStorage.getItem('code') != null) {
+    $('.login').fadeOut("slow");
+    $('.search-feature, .header, .footer').fadeIn("slow");
   } else {
     localStorage.removeItem('staySignedIn');
     localStorage.removeItem('code')
-    $('.login').fadeIn();
+    $('.login').fadeIn("slow");
+  }
+}
+
+function loading(show) {
+  if(show === true) {
+    $('.loading').fadeIn("slow");
+  } else {
+    $('.loading').fadeOut("slow");
   }
 }

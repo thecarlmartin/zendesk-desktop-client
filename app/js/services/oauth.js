@@ -16,6 +16,7 @@ var BrowserWindow = remote.require('browser-window');
 
 function zendeskOAuth() {
 
+  loading(true);
   // Zendesk Application credentials
   var options = {
       client_id: 'desktop_support',
@@ -43,6 +44,7 @@ function zendeskOAuth() {
       show: false,
       alwaysOnTop: true
   });
+
   var zendeskURL = 'https://' + zendeskSubdomain + '.zendesk.com/oauth/authorizations/';
   var authUrl = zendeskURL + 'new?response_type=code&redirect_uri=' + options.redirectURI + '&client_id=' + options.client_id + '&scope=' + options.scope;
   //Remove Zendesk Cookies
@@ -79,6 +81,7 @@ function zendeskOAuth() {
   // Reset the authWindow on close
   authWindow.on('close', function() {
       authWindow = null;
+      loading(false);
   }, false);
 }
 
@@ -100,11 +103,12 @@ function requestZendeskToken(zendeskOptions, authCode) {
       var response = JSON.parse(tokenExchange.responseText);
       localStorage.setItem('code', response.access_token);
       console.log('Access Token: ' + response.access_token);
+      initiateViews();
+      loading(false);
     }
   };
 
   tokenExchange.open('POST', tokenURL, true);
   tokenExchange.setRequestHeader("Content-Type", "application/json");
   tokenExchange.send(tokenOptions);
-  initiateViews();
 }
