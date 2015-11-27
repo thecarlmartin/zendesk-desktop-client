@@ -7,5 +7,3 @@ This app will allow the employees of a small business access a Zendesk Help Cent
 #Stored Items
 - Zendesk OAuth token ('code')
 - Stay Signed in decision ('staySignedIn')
-
-Add method that deletes token, when Window is closed, if user didn't select stay signed in.
