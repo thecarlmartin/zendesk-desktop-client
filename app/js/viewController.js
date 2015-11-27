@@ -4,6 +4,8 @@ $(document).ready(function() {
   if(localStorage.getItem('staySignedIn') !== 'true') {
     localStorage.removeItem('code');
     localStorage.removeItem('staySignedIn');
+    localStorage.removeItem('subdomain');
+    localStorage.removeItem('userEmail');
   }
   initiateViews();
 });

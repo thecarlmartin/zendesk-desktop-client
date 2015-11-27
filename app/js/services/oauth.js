@@ -102,7 +102,9 @@ function requestZendeskToken(zendeskOptions, authCode) {
     if (tokenExchange.readyState == 4 && tokenExchange.status == 200) {
       var response = JSON.parse(tokenExchange.responseText);
       localStorage.setItem('code', response.access_token);
+      localStorage.setItem('subdomain', document.getElementById("subdomain-field").value);
       console.log('Access Token: ' + response.access_token);
+      requestUserInfo();
       initiateViews();
       loading(false);
     }
