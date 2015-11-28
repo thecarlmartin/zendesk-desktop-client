@@ -1,27 +1,22 @@
 $(document).ready(function() {
-  //Hiding UI on start
-  $('.search-feature, .header, .login, .loading, .footer').hide();
   if(localStorage.getItem('staySignedIn') !== 'true') {
-    localStorage.removeItem('code');
-    localStorage.removeItem('staySignedIn');
-    localStorage.removeItem('subdomain');
-    localStorage.removeItem('userEmail');
+    logout();
+  } else {
+    initiateViews();
   }
-  requestUserInfo();
-  initiateViews();
 });
 
 function initiateViews() {
-  $('.search-feature, .header, .login, .loading, .footer').hide();
+  hideEverything();
   console.log(localStorage.getItem('code'));
 
   if(localStorage.getItem('code') != null) {
     $('.login').fadeOut("slow");
-    $('.search-feature, .header, .footer').fadeIn("slow");
+    requestUserInfo();
+    $('.search-feature, .header').fadeIn("slow");
   } else {
-    localStorage.removeItem('staySignedIn');
-    localStorage.removeItem('code')
-    $('.login').fadeIn("slow");
+    logout();
+    return;
   }
 }
 

@@ -104,7 +104,6 @@ function requestZendeskToken(zendeskOptions, authCode) {
       localStorage.setItem('code', response.access_token);
       localStorage.setItem('subdomain', document.getElementById("subdomain-field").value);
       console.log('Access Token: ' + response.access_token);
-      requestUserInfo();
       initiateViews();
       loading(false);
     }

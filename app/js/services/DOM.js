@@ -10,3 +10,7 @@ function setFormText(id, add, text) {
 function changeTextColor(id, color) {
   document.getElementById(id).style.color = color;
 }
+
+function hideEverything() {
+  $('.search-feature, .header, .login, .loading, .footer').hide();
+}
