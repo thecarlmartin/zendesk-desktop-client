@@ -11,6 +11,8 @@ function logout() {
 
 
 function requestUserInfo() {
+  hideEverything();
+  loading(true, 'Wir rufen Ihre Informationen ab.');
   var api = '.zendesk.com/api/v2/users/me.json';
   var userInfo = zendeskAPICall(api, handleUserInfo);
 }
@@ -24,7 +26,8 @@ function handleUserInfo (response) {
     localStorage.setItem('userID', response.user.id);
     localStorage.setItem('userName', response.user.name);
     localStorage.setItem('userEmail', response.user.email);
-    $('#logout').text('Nicht ' + localStorage.getItem('userName') + '? Abmelden')
-    $('.footer').fadeIn();
+    $('#logout').text('Nicht ' + localStorage.getItem('userName') + '? Abmelden');
+    initiateViews();
+    loading(false, '')
   }
 }

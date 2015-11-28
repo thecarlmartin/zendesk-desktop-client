@@ -16,7 +16,7 @@ var BrowserWindow = remote.require('browser-window');
 
 function zendeskOAuth() {
 
-  loading(true);
+  loading(true, '');
   // Zendesk Application credentials
   var options = {
       client_id: 'desktop_support',
@@ -81,7 +81,7 @@ function zendeskOAuth() {
   // Reset the authWindow on close
   authWindow.on('close', function() {
       authWindow = null;
-      loading(false);
+      loading(false, '');
   }, false);
 }
 
@@ -104,8 +104,7 @@ function requestZendeskToken(zendeskOptions, authCode) {
       localStorage.setItem('code', response.access_token);
       localStorage.setItem('subdomain', document.getElementById("subdomain-field").value);
       console.log('Access Token: ' + response.access_token);
-      initiateViews();
-      loading(false);
+      requestUserInfo();
     }
   };
 

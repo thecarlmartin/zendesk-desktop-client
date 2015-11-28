@@ -11,6 +11,7 @@ function startSearch () {
     $('#search-box').addClass("shake");
     $('#search-box').on("webkitAnimationEnd", function() {$(this).removeClass("shake")});
   } else {
+
     console.log(searchInput);
     var searchResults = searchHelpCenter(searchInput, 'physiotherapiemartin');
     console.log(searchResults);

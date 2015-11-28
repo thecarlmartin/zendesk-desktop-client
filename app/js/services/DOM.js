@@ -12,12 +12,15 @@ function changeTextColor(id, color) {
 }
 
 function hideEverything() {
-  $('.search-feature, .header, .login, .loading, .footer').hide();
+  $('.search-feature, .header, .login, .footer').hide();
 }
 
-function loading(show) {
+function loading(show, description) {
   if(show === true) {
     $('.loading').fadeIn("slow");
+    if(description !== null || description === '') {
+      $('#loading-description').text(description);
+    }
   } else {
     $('.loading').fadeOut("slow");
   }
