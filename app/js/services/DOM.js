@@ -14,3 +14,11 @@ function changeTextColor(id, color) {
 function hideEverything() {
   $('.search-feature, .header, .login, .loading, .footer').hide();
 }
+
+function loading(show) {
+  if(show === true) {
+    $('.loading').fadeIn("slow");
+  } else {
+    $('.loading').fadeOut("slow");
+  }
+}

@@ -19,11 +19,3 @@ function initiateViews() {
     return;
   }
 }
-
-function loading(show) {
-  if(show === true) {
-    $('.loading').fadeIn("slow");
-  } else {
-    $('.loading').fadeOut("slow");
-  }
-}
