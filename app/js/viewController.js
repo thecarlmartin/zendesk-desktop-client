@@ -7,6 +7,7 @@ $(document).ready(function() {
     localStorage.removeItem('subdomain');
     localStorage.removeItem('userEmail');
   }
+  requestUserInfo();
   initiateViews();
 });
 

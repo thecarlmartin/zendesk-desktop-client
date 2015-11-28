@@ -25,6 +25,7 @@ function requestUserInfo() {
       console.log('User Name: ' + localStorage.getItem('userName'));
       console.log('User ID: ' + localStorage.getItem('userID'));
       console.log('User Email: ' + localStorage.getItem('userEmail'));
+      $('#logout').text('Nicht ' + localStorage.getItem('userName') + '? Abmelden')
       loading(false);
     }
   };
