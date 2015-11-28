@@ -6,14 +6,12 @@ function searchHelpCenter (searchString, subdomain) {
 }
 
 function startSearch () {
-  loading(true);
   var searchInput = document.getElementById("search-box").value;
   if (searchInput === "") {
-    document.getElementById("search-box").style.borderBottom = "0.25vw solid gray";
-    loading(false);
+    $('#search-box').addClass("shake");
+    $('#search-box').on("webkitAnimationEnd", function() {$(this).removeClass("shake")});
   } else {
     console.log(searchInput);
-    document.getElementById("search-box").style.borderBottom = "0.25vw solid white";
     var searchResults = searchHelpCenter(searchInput, 'physiotherapiemartin');
     console.log(searchResults);
   }
