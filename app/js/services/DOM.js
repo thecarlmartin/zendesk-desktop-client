@@ -12,7 +12,7 @@ function changeTextColor(id, color) {
 }
 
 function hideEverything() {
-  $('.search-feature, .header, .login, .footer').hide();
+  $('.search-feature, .header, .login, .footer, .search-results-center').hide();
 }
 
 function loading(show, description) {

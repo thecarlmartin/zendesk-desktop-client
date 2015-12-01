@@ -6,6 +6,7 @@ function logout() {
   localStorage.removeItem('userName');
   localStorage.removeItem('userID');
   hideEverything();
+  loading(false, '');
   $('.login').fadeIn("slow");
 }
 
@@ -14,7 +15,7 @@ function requestUserInfo() {
   hideEverything();
   loading(true, 'Wir rufen Ihre Informationen ab.');
   var api = '.zendesk.com/api/v2/users/me.json';
-  var userInfo = zendeskAPICall(api, handleUserInfo);
+  zendeskAPICall(api, handleUserInfo);
 }
 
 function handleUserInfo (response) {

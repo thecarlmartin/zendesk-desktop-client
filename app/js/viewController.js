@@ -6,15 +6,6 @@ $(document).ready(function() {
   }
 });
 
-function startApp() {
-  if(localStorage.getItem('code') != null) {
-    $('.search-feature, .header').fadeIn("slow");
-  } else {
-    logout();
-    return;
-  }
-}
-
 function initiateViews() {
   hideEverything();
   if(localStorage.getItem('code') != null) {
