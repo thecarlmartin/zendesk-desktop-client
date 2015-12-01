@@ -14,8 +14,12 @@ body {
   background: radial-gradient(circle farthest-corner at 0% 0% , #83D0D7 0%, #4A90E2 100%);
 }
 
+a {
+  text-decoration: none;
+}
+
 a:hover {
-    -webkit-filter: drop-shadow(1px 1px 4px rgba(0, 0, 0, 0.3) );
+  -webkit-filter: drop-shadow(1px 1px 4px rgba(0, 0, 0, 0.3) );
 }
 
 h1 {
@@ -73,7 +77,7 @@ input[type=text], textarea {
 HEADER
 ******************/
 
-header {
+.header {
   position: absolute;
   top: 0;
   left: 0;
@@ -256,7 +260,7 @@ SEARCH
 SEARCH-RESULTS
 ******************/
 
-.search-results-center {
+.entire-page {
   position: fixed;
   top: 0;
   height: 100%;
@@ -264,34 +268,82 @@ SEARCH-RESULTS
   text-align: center;
 }
 
-.search-results-center:before {
+.prep-horizontal-align:before {
   content: '';
   display: inline-block;
   height: 100%;
   vertical-align: middle;
-  margin: -0.25em; /* Adjusts for spacing */
+  /*margin: -0.25em; /* Adjusts for spacing */
+
 }
 
-.search-results {
+.horizontal-align {
   display: inline-block;
   vertical-align: middle;
-  width: 80%;
-  text-align: left;
-  padding: 25px;
-  border-radius: 8px;
-  background: white;
-  box-shadow: 0px 1px 4px 0px rgba(0,0,0,0.20);
-}
-.search-results a img {
-  display: inline;
-}
-.search-results a p {
-  display: inline;
 }
 
 #back-button {
-  -webkit-transform: rotate(180deg); /* Chrome, Safari, Opera */
-  padding: 0;
+  float: left;
+  margin: 0.5vw 0 0 1vw;
+}
+
+#back-button img {
+  -webkit-transform: rotate(180deg);
+}
+
+#back-button img, #done-button img {
+  width: 2vw;
+  height: 2vw;
+}
+
+#back-button p, #done-button p, #viewTitle {
+  font-family: 'Open Sans', sans-serif;
+  font-size: 2vw;
+  font-weight: 300;
+  text-decoration: none;
+  color: #FFF;
+}
+
+#done-button {
+  float: right;
+  margin: 0.5vw 1vw 0 0;
+}
+
+#viewTitle {
+  font-weight: 400;
+  width: 100%;
+  text-align: center;
+  margin-top: 0.5vw;
+}
+
+#search-results-view {
+  width: 100%;
+}
+
+.search-results-card {
+  width: 80%;
+  background: white;
+  box-shadow: 0px 1px 4px 0px rgba(0,0,0,0.20);
+}
+
+#search-completed-footer {
+  position: fixed;
+  width: 100%;
+  text-align: center;
+  bottom: 5px;
+}
+
+#search-completed-footer a p {
+  font-family: 'Open Sans', sans-serif;
+  font-size: 2vw;
+  font-weight: 400;
+  text-decoration: none;
+  color: #FFF;
+}
+
+#search-completed-footer a img {
+  height: 2vw;
+  width: 2vw;
 }
 
 /*****************

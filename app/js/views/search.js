@@ -52,5 +52,5 @@ function handleHelpCenterResults(response) {
 
   console.log(response);
   loading(false, '')
-  $('.search-results-center').fadeIn();
+  $('.search-completed').fadeIn();
 }

@@ -33,7 +33,7 @@
     </div>
 
     <!-- Top Navigation -->
-    <header class="header">
+    <header class="header" id='header-main'>
       <a href="" alt="Home"><img src="img/home-icon.svg" alt="Go Home" id="home"></a>
       <a href="" alt="Anfragen" onclick="requestUserInfo();return false;" id="requests">Anfragen</a>
       <img src="img/x.svg" alt="Close Support App" id="close">
@@ -72,19 +72,33 @@
     </div>
 
     <!-- Search Results -->
-    <div class="search-results-center">
-      <div id='search-results'>
-        <a alt="Zurück" onclick="initiateViews();return false;">
-          <img src="img/arrow-right.svg" alt="Start Search" id="back-button">
-          <p>Zurück</p>
+    <div class="search-completed entire-page">
+      <div class="search-results entire-page prep-horizontal-align">
+        <div class="horizontal-align" id="search-results-view">
+          <!-- <div class="search-results-card"> -->
+            <p class="search-results-number">1</p>
+            <p class="search-results-title">Help Center Article Title Goes Here</p>
+          <!-- </div> -->
+        </div>
+      </div>
+      <div class="header prep-horizontal-align">
+        <a href="" alt="Go Back" onclick="initiateViews(); return false;"id="back-button">
+          <img src="img/arrow-right.svg" class="horizontal-align">
+          <p class="horizontal-align">Zurück</p>
         </a>
-        <h2>Lösungsvorschläge</h2>
-        <p class="help-center-description">Wir haben in unserem Help Center schon einige Artikel zu Ihrem Problem gefunden.</p>
-        <span class="help-center-articles">
-        </span>
+        <a href="" alt="Done" id="done-button">
+          <p class="horizontal-align">Fertig</p>
+          <img src="img/x.svg" class="horizontal-align">
+        </a>
+      </div>
+      <p class="horizontal-align" id="viewTitle">Lösungsvorschläge</p>
+      <div id="search-completed-footer" class="prep-horizontal-align">
+        <a href="" alt="Make a Request">
+          <p class="horizontal-align">Eine Anfrage Stellen</p>
+          <img src="img/arrow-right.svg" class="horizontal-align">
+        </a>
       </div>
     </div>
-
   </body>
 
 </html>
