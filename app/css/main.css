@@ -265,7 +265,6 @@ SEARCH-RESULTS
   top: 0;
   height: 100%;
   width: 100%;
-  text-align: center;
 }
 
 .prep-horizontal-align:before {
@@ -274,7 +273,6 @@ SEARCH-RESULTS
   height: 100%;
   vertical-align: middle;
   /*margin: -0.25em; /* Adjusts for spacing */
-
 }
 
 .horizontal-align {
@@ -294,6 +292,10 @@ SEARCH-RESULTS
 #back-button img, #done-button img {
   width: 2vw;
   height: 2vw;
+}
+
+#done-button img {
+  margin-left: 2px;
 }
 
 #back-button p, #done-button p, #viewTitle {
@@ -316,21 +318,50 @@ SEARCH-RESULTS
   margin-top: 0.5vw;
 }
 
-#search-results-view {
-  width: 100%;
+.search-results {
+  text-align: center;
 }
 
 .search-results-card {
   width: 80%;
   background: white;
   box-shadow: 0px 1px 4px 0px rgba(0,0,0,0.20);
+  height: 7vw;
+  text-align: left;
+  margin: 5% 0 5% 0
+}
+
+.search-results-number {
+  display: inline-block;
+  border: 1px solid #4A90E2;
+  color: #4A90E2;
+  padding: 0.5vw;
+  height: 3vw;
+  width: 3vw;
+  line-height: 3vw;
+  border-radius: 100%;
+  font-size: 3vw;
+  font-weight: 300;
+  text-align: center;
+  margin: 1.5vw 2% 1.5vw 2%;
+}
+
+.search-results-title {
+  display: inline;
+  font-size: 3vw;
+  line-height: 3vw;
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 300;
+  text-decoration: none;
+  color: #4A90E2;
+  margin: 1.5vw 0 1.5vw 0;
 }
 
 #search-completed-footer {
   position: fixed;
   width: 100%;
   text-align: center;
-  bottom: 5px;
+  bottom: 10px;
 }
 
 #search-completed-footer a p {
