@@ -13,43 +13,31 @@ function startSearch () {
 
 function searchHelpCenter (searchString) {
   var api = ".zendesk.com/api/v2/help_center/articles/search.json?query=" + searchString
-  zendeskAPICall(api, handleHelpCenterResults)
+  zendeskAPICall(api, displayHelpCenterCards)
 }
 
-function handleHelpCenterResults(response) {
+function displayHelpCenterCards(response) {
   var articles = response.results;
-  var resultsHTML = '';
-  var descriptionText = '';
-  if(articles.length > 0) {
-    if(articles.length === 1) {
-      descriptionText += 'Wir haben in unserem Help Center eine Antwort gefunden';
-    } else if (articles.length > 1) {
-      descriptionText += 'Wir haben in unserem Help Center mehrere Antworten gefunden';
+  articleCount = articles.length;
+  if (articleCount > 0) {
+    if(articleCount > 5) {
+      articleCount = 5;
     }
-
-    for(i = 0; i < articles.length; i += 1) {
-      resultsHTML += '<a href="" class="help-center-article" onclick="openHCArticle(' + i + '); return false;">' + articles[i].name + '</a>';
+    var searchResultsCard = '';
+    for(i = 0; i < articleCount; i += 1) {
+      var resultNumber = i + 1;
+      searchResultsCard += [
+        '<a href="" class="search-results-card" onclick="displayArticle(' + i + '); return false;">',
+          '<p class="search-results-number">' + resultNumber + '</p>',
+          '<p class="search-results-title">' + articles[i].name + '</p>',
+        '</a>'
+        ].join('');
     }
-
-  console.log(resultsHTML);
-  $('.help-center-description').text(descriptionText);
-  $('.help-center-articles').html(resultsHTML);
+    $('.search-results-insert').html(searchResultsCard);
+  } else {
+    createTicket();
+    return;
   }
-
-
-
-
-
-
-
-
-
-
-
-
-  console.log(articles.length);
-
-
   console.log(response);
   loading(false, '')
   $('.search-completed').fadeIn();
