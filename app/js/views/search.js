@@ -9,7 +9,7 @@ function startSearch () {
   var searchInput = document.getElementById("search-box").value;
   if (searchInput !== "") {
     loading(true, 'Wir durchsuchen unser Help Center nach Lösungen.');
-    hideEverything();
+    hideEverything(true);
     document.getElementById("search-box").value = "";
     searchHelpCenter(searchInput);
   } else {
@@ -28,13 +28,12 @@ function searchHelpCenter (searchString) {
 function displayHelpCenterCards(response) {
   var articles = response.results;
   localStorage.setItem('searchResults', JSON.stringify(articles));
-  console.log(JSON.parse(localStorage.getItem('searchResults')));
   articleCount = articles.length;
   if (articleCount > 0) {
     if(articleCount > 5) {
       articleCount = 5;
     }
-    var searchResultsCard = '';
+    var searchResultsCard = '<p id="search-results-description">Wir haben einige Lösungsvorschläge gefunden:</p>';
 
     for(i = 0; i < articleCount; i += 1) {
       var resultNumber = i + 1;
@@ -46,14 +45,14 @@ function displayHelpCenterCards(response) {
         '</a>'
         ].join('');
     }
-    //
+
     $('div.search-results-insert').html(searchResultsCard);
   } else {
     createTicket();
     return;
   }
   loading(false, '')
-  $('.search-completed').fadeIn();
+  $('.search-completed, #header-main').fadeIn();
 }
 
 //Displays the Help Center articles

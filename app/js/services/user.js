@@ -5,14 +5,13 @@ function logout() {
   localStorage.removeItem('userEmail');
   localStorage.removeItem('userName');
   localStorage.removeItem('userID');
-  hideEverything();
+  hideEverything(true);
   loading(false, '');
   $('.login').fadeIn("slow");
 }
 
-
 function requestUserInfo() {
-  hideEverything();
+  hideEverything(true);
   loading(true, 'Wir rufen Ihre Informationen ab.');
   var api = '.zendesk.com/api/v2/users/me.json';
   zendeskAPICall(api, handleUserInfo);

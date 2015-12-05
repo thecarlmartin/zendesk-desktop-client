@@ -11,8 +11,11 @@ function changeTextColor(id, color) {
   document.getElementById(id).style.color = color;
 }
 
-function hideEverything() {
-  $('.search-feature, #header-main, .login, .footer, .search-completed, .doneAnimationCanvas').hide();
+function hideEverything(header) {
+  $('.search-feature, .login, .footer, .search-completed, .doneAnimationCanvas, .make-request').hide();
+  if(header === true) {
+    $('#header-main').hide();
+  }
 }
 
 function loading(show, description) {

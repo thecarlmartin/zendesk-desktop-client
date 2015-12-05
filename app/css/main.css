@@ -322,9 +322,18 @@ SEARCH-RESULTS
 
 #viewTitle {
   font-weight: 400;
-  width: 100%;
+  position: fixed;
+  top: 0;
+  left: 45%;
+  width: 10%;
   text-align: center;
   margin-top: 0.5vw;
+}
+
+#search-results-description {
+  color: white;
+  text-align: left;
+  font-size: 2vw;
 }
 
 .search-results {
