@@ -12,7 +12,7 @@ function changeTextColor(id, color) {
 }
 
 function hideEverything() {
-  $('.search-feature, #header-main, .login, .footer, .search-completed').hide();
+  $('.search-feature, #header-main, .login, .footer, .search-completed, .doneAnimationCanvas').hide();
 }
 
 function loading(show, description) {
@@ -24,4 +24,13 @@ function loading(show, description) {
   } else {
     $('.loading').fadeOut("slow");
   }
+}
+
+function doneAnimation() {
+  hideEverything();
+  $('.doneAnimationCanvas').show();
+  function removeDone() {
+    setTimeout('initiateViews()', 2000);
+  }
+  removeDone();
 }

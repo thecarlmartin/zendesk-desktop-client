@@ -38,12 +38,21 @@ h2 {
   margin: 0;
 }
 
-p {
+p, ol, ul, table {
   font-family: 'Open Sans', sans-serif;
   font-weight: 400;
   font-size: 0.9em;
-  color: #A1A1A1;
+  color: #757575;
   margin: 0;
+}
+
+table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+table tbody tr td {
+  border: 1px solid #757575;
 }
 
 /* CHANGING PLACEHOLDER TEXT FOR ALL BROWSERS */
@@ -365,6 +374,58 @@ SEARCH-RESULTS
   margin: 1.5vw 0 1.5vw 0;
 }
 
+/*The following classes style the articles*/
+.article-insert-style {
+  position: fixed;
+  top: 12%;
+  left: 10%;
+  padding: 7% 3% 3% 3%;
+  width: 74%;
+  background: white;
+  box-shadow: 0px 1px 4px 0px rgba(0,0,0,0.20);
+  height: 60%;
+  text-align: left;
+  overflow: scroll;
+}
+
+.article-insert-style p, .article-insert-style ol, .article-insert-style ul, .article-insert-style table {
+  padding: 6px 0 6px 0;
+  font-size: 1.1em;
+}
+
+.article-insert-style ol, .article-insert-style ul {
+  padding: 6px 0 6px 2em;
+}
+
+.article-insert-style a {
+  width: 1.6em;
+  height: 1.6em;
+  position: fixed;
+  top: 12%;
+  right: 13%;
+  text-align: center;
+  padding: 3% 0 1%;
+}
+
+.article-insert-style a img {
+  width: 1.4em;
+  padding-top: 0.4em;
+  height: 1.4em;
+}
+
+.article-insert-style h2 {
+  position: fixed;
+  top: 12%;
+  width: 70%;
+  left: 10%;
+  background-color: white;
+  padding: 3% 7% 0 3%;
+  margin-bottom: 1%;
+  font-size: 1.6em;
+  height: 1.6em;
+  overflow: hidden;
+}
+
 #search-completed-footer {
   position: fixed;
   width: 100%;
@@ -425,4 +486,47 @@ LOADING
   color: white;
   width: 100%;
   text-align: center;
+}
+
+/*****************
+DONE ANIMATION
+******************/
+
+.doneAnimationCanvas {
+  position: fixed;
+  height: 100%;
+  width: 100%;
+  top: 0%;
+  left: 0%;
+  text-align: center;
+}
+
+.doneAnimationCanvas:before {
+  content: '';
+  display: inline-block;
+  height: 100%;
+  vertical-align: middle;
+  margin: -0.25em; /* Adjusts for spacing */
+}
+
+.wrapper {
+  display: inline-block;
+  vertical-align: middle;
+  width: 20vw;
+}
+
+.checkmark {
+  stroke: #FFF;
+  stroke-dashoffset: 745.74853515625;
+  stroke-dasharray: 745.74853515625;
+  animation: dash 3s ease-out forwards;
+}
+
+@keyframes dash {
+  0% {
+    stroke-dashoffset: 745.74853515625;
+  }
+  100% {
+    stroke-dashoffset: 0;
+  }
 }

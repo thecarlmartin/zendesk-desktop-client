@@ -1,4 +1,5 @@
 $(document).ready(function() {
+
   if(localStorage.getItem('staySignedIn') !== 'true') {
     logout();
   } else {
