@@ -7,9 +7,6 @@
 
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
 
-    <!-- Importing JavaScript Main Files -->
-    <script src="js/viewController.js"></script>
-
     <!-- Importing JavaScript Services -->
     <script src="js/services/oauth.js"></script>
     <script src="js/services/zendeskAPI.js"></script>
@@ -19,6 +16,10 @@
     <!-- Importing Views -->
     <script src="js/views/login.js"></script>
     <script src="js/views/search.js"></script>
+    <script src="js/views/makerequest.js"></script>
+
+    <!-- Importing JavaScript Main Files -->
+    <script src="js/viewController.js"></script>
   </head>
 
   <body class="main">
@@ -62,7 +63,7 @@
         <p>Damit wir Ihnen schneller helfen können, müssen Sie sich anmelden. Geben Sie dazu die Zendesk Subdomain ein.</p>
         <form onsubmit="zendeskOAuth();return false;">
           <p id="subdomain-textabove">Zendesk Subdomain:</p>
-          <input type="text" placeholder="beispiel.zendesk.com" id="subdomain-field">
+          <input type="text" placeholder="beispiel" id="subdomain-field">
           <p id="subdomain-completion">.zendesk.com</p>
           <div>
             <input type="checkbox" name="stay-signed-in" value="Angemeldet bleiben" id="staySignedIn">
@@ -83,18 +84,8 @@
           <!-- Articles are inserted Here -->
         </div>
       </div>
-      <!-- <div class="header header-search-results prep-horizontal-align">
-        <a href="" alt="Go Back" onclick="leaveSearchResults(); return false;"id="back-button">
-          <img src="img/arrow-right.svg" class="horizontal-align">
-          <p class="horizontal-align">Zurück</p>
-        </a>
-        <a href="#" onclick="doneAnimation()" alt="Done" id="done-button">
-          <p class="horizontal-align">Problem Gelöst</p>
-        </a>
-      </div> -->
-      <!-- <p class="horizontal-align" id="viewTitle">Lösungsvorschläge</p> -->
       <div id="search-completed-footer" class="prep-horizontal-align">
-        <a href="" alt="Make a Request">
+        <a href="#" onclick="startTicket();" alt="Make a Request">
           <p class="horizontal-align">Eine Anfrage Stellen</p>
           <img src="img/arrow-right.svg" class="horizontal-align">
         </a>
@@ -103,7 +94,23 @@
 
     <!-- Make a Request -->
     <div class="make-request">
-
+      <h2>Eine Anfrage Stellen</h2>
+      <a href="#" alt="Go Back" onclick="returnToSearch(); return false;" id="back-button">
+        <img src="img/arrow-right-blue.svg" class="horizontal-align">
+        <p class="horizontal-align">Zurück</p>
+      </a>
+      <a href="#" alt="Send Ticket" onclick="createTicket(); return false;" id="send-button">
+        <p class="horizontal-align">Senden</p>
+        <img src="img/arrow-right-blue.svg" class="horizontal-align">
+      </a>
+      <form>
+        <div>
+          <p>Betreff:</p>
+          <input id="make-request-subject" type="text" placeholder="Beschreiben Sie Ihr Anliegen kurz.">
+        </div>
+        <p>Beschreiben Sie Ihr Anliegen ein wenig genauer:</p>
+        <textarea id="make-request-body" rows="10" type="text" placeholder="Erzählen Sie uns mehr."></textarea>
+      </form>
     </div>
 
     <!-- Top Navigation -->

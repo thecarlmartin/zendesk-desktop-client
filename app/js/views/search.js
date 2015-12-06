@@ -6,7 +6,9 @@ $(document).ready(function() {
 });
 
 function startSearch () {
+  localStorage.setItem('searchSuccess', false);
   var searchInput = document.getElementById("search-box").value;
+  localStorage.setItem('searchQuery', searchInput);
   if (searchInput !== "") {
     loading(true, 'Wir durchsuchen unser Help Center nach Lösungen.');
     hideEverything(true);
@@ -45,10 +47,11 @@ function displayHelpCenterCards(response) {
         '</a>'
         ].join('');
     }
-
+    localStorage.setItem('searchSuccess', true);
     $('div.search-results-insert').html(searchResultsCard);
   } else {
-    createTicket();
+    startTicket();
+    localStorage.setItem('searchSuccess', false);
     return;
   }
   loading(false, '')

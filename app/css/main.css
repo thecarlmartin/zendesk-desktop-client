@@ -289,32 +289,6 @@ SEARCH-RESULTS
   vertical-align: middle;
 }
 
-#back-button {
-  float: left;
-  margin: 0.5vw 0 0 1vw;
-}
-
-#back-button img {
-  -webkit-transform: rotate(180deg);
-}
-
-#back-button img, #done-button img {
-  width: 2vw;
-  height: 2vw;
-}
-
-#done-button img {
-  margin-left: 2px;
-}
-
-#back-button p, #done-button p, #viewTitle {
-  font-family: 'Open Sans', sans-serif;
-  font-size: 2vw;
-  font-weight: 300;
-  text-decoration: none;
-  color: #FFF;
-}
-
 #done-button {
   float: right;
   margin: 0.5vw 1vw 0 0;
@@ -455,6 +429,99 @@ SEARCH-RESULTS
   width: 2vw;
 }
 
+/*****************
+MAKE REQUEST
+******************/
+
+.make-request {
+  position: fixed;
+  top: 12%;
+  left: 10%;
+  padding: 7% 3% 3% 3%;
+  width: 74%;
+  background: white;
+  box-shadow: 0px 1px 4px 0px rgba(0,0,0,0.20);
+  height: 60%;
+  text-align: left;
+  overflow: scroll;
+}
+
+.make-request h2 {
+  position: fixed;
+  top: 12%;
+  width: 74%;
+  left: 10%;
+  background-color: white;
+  padding: 3% 0 0 3%;
+  margin-bottom: 1%;
+  font-size: 2vw;
+  font-weight: 400;
+  height: 3vw;
+  overflow: hidden;
+  text-align: center;
+}
+
+#back-button {
+  text-align: left;
+  position: fixed;
+  top: 12%;
+  left: 10%;
+  margin: 3% 0 0 3%;
+}
+
+#send-button {
+  text-align: right;
+  position: fixed;
+  top: 12%;
+  right: 10%;
+  margin: 3% 3% 0 0;
+}
+
+#back-button img {
+  -webkit-transform: rotate(180deg);
+  width: 2vw;
+  height: 2vw;
+}
+
+#send-button img {
+  width: 2vw;
+  height: 2vw;
+}
+
+#back-button p, #send-button p {
+  font-family: 'Open Sans', sans-serif;
+  font-size: 2vw;
+  font-weight: 300;
+  text-decoration: none;
+  color: #4A90E2;
+}
+
+#make-request-subject {
+  width: 90%;
+  background: rgba(0, 0, 0, 0);
+  font-family: 'Open Sans', sans-serif;
+  font-size: 1em;
+  color: #757575;
+  border: none;
+  border-bottom: 0.1em solid #757575;
+}
+
+#make-request-body {
+  background: rgba(0, 0, 0, 0);
+  font-family: 'Open Sans', sans-serif;
+  font-size: 1em;
+  color: #757575;
+  border: none;
+  border: 0.1em solid #757575;
+  border-radius: 3px;
+  resize: none;
+  width: 98.5%;
+}
+
+.make-request form p {
+  display: inline-block;
+  padding: 20px 5px 0 0;
+}
 /*****************
 LOADING
 ******************/
