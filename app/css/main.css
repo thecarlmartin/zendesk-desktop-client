@@ -19,7 +19,7 @@ a {
 }
 
 a:hover {
-  -webkit-filter: drop-shadow(1px 1px 4px rgba(0, 0, 0, 0.3) );
+  -webkit-filter: drop-shadow(1px 1px 4px rgba(0, 0, 0, 0.2) );
 }
 
 h1 {
@@ -53,6 +53,10 @@ table {
 
 table tbody tr td {
   border: 1px solid #757575;
+}
+
+.drag-area {
+  -webkit-app-region: drag;
 }
 
 /* CHANGING PLACEHOLDER TEXT FOR ALL BROWSERS */

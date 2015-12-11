@@ -1,3 +1,5 @@
+var remote = require('remote');
+
 $(document).ready(function() {
 
   if(localStorage.getItem('staySignedIn') !== 'true') {
@@ -15,4 +17,9 @@ function initiateViews() {
     logout();
     return;
   }
+}
+
+function closeWindow() {
+  var window = remote.getCurrentWindow();
+  window.close();
 }
