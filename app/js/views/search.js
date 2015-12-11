@@ -66,7 +66,7 @@ function displayArticle(id) {
 
   articlesHTML += [
     '<h2>' + articlesArray[id].name + '</h2>',
-    '<a href="#" onclick="hideArticle()"><img src="img/x-blue.svg"></a>',
+    '<a href="#" onclick="hideArticle()">Schließen</a>',
     '<p>' + articlesArray[id].body + '</p>'
   ].join('');
 

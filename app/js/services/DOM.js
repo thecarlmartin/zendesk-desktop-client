@@ -30,10 +30,10 @@ function loading(show, description) {
 }
 
 function doneAnimation() {
-  hideEverything();
+  hideEverything(true);
   $('.doneAnimationCanvas').show();
   function removeDone() {
-    setTimeout('initiateViews()', 2000);
+    setTimeout('initiateViews()', 2200);
   }
   removeDone();
 }

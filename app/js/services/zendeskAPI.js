@@ -26,16 +26,18 @@ function zendeskAPIPost(api, data, callbackFunction) {
   var authorization = 'Bearer ' + localStorage.getItem('code');
 
   request.onreadystatechange = function() {
-    if(request.readyState == 4 && request.status == 200) {
+    if(request.readyState == 4 && request.status == 201) {
       var response = JSON.parse(request.responseText);
       callbackFunction(response);
       return;
-    } else if(request.readyState == 4 && request.status !== 200) {
+    } else if(request.readyState == 4 && request.status !== 201) {
+      console.log(request);
       return 'error';
     }
   }
 
   request.open('POST', apiURL, true);
   request.setRequestHeader("Authorization", authorization);
+  request.setRequestHeader("Content-Type", 'application/json');
   request.send(JSON.stringify(data));
 }

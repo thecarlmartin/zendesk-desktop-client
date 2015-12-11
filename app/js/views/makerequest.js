@@ -18,7 +18,7 @@ function startTicket() {
   loading(false, '');
   var query = localStorage.getItem('searchQuery');
   hideEverything();
-  $('.make-request, #header-main').fadeIn();
+  $('.make-request, #header-main').show();
   setFormText('make-request-subject', false, query);
   setFormText('make-request-body', false, '');
 }
@@ -56,15 +56,15 @@ function createTicket() {
 
   //Creating a Zendesk Ticket
   loading(true, 'Wir übermitteln Ihre Anfrage');
-  var request = {
+  var data = { request: {
     subject: subject,
-    comment: comment,
+    comment: {body: comment},
     requester_id: requester_id,
     status: 'new'
-  }
+  }};
 
-  var apiURL = '.zendesk.com/api/v2/requests.json'
-  zendeskAPIPost(apiURL, requests)
+  var apiURL = '.zendesk.com/api/v2/requests.json';
+  zendeskAPIPost(apiURL, data, handleCreatedTicket);
 
 }
 
@@ -72,4 +72,5 @@ function handleCreatedTicket(response) {
   console.log(response);
   alert('Created Ticket');
   loading(false, '');
+  doneAnimation();
 }
