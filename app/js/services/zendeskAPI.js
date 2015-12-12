@@ -3,6 +3,7 @@ function zendeskAPICall(api, callbackFunction) {
   var zendeskSubdomain = localStorage.getItem('subdomain');
   var apiURL = 'https://' + zendeskSubdomain + api;
   var authorization = 'Bearer ' + localStorage.getItem('code');
+  console.log(authorization);
 
   request.onreadystatechange = function() {
     if(request.readyState == 4 && request.status == 200) {
@@ -22,7 +23,7 @@ function zendeskAPICall(api, callbackFunction) {
 function zendeskAPIPost(api, data, callbackFunction) {
   var request = new XMLHttpRequest();
   var zendeskSubdomain = localStorage.getItem('subdomain');
-  var apiURL = 'https://' + zendeskSubdomain + api;
+  var apiURL = 'http://' + zendeskSubdomain + api;
   var authorization = 'Bearer ' + localStorage.getItem('code');
 
   request.onreadystatechange = function() {
@@ -31,13 +32,15 @@ function zendeskAPIPost(api, data, callbackFunction) {
       callbackFunction(response);
       return;
     } else if(request.readyState == 4 && request.status !== 201) {
-      console.log(request);
+      alert("Ein Fehler ist aufgetreten. Bitte versuchen Sie es erneut.");
+      loading(false, '');
+      initiateViews();
       return 'error';
     }
   }
-
+  console.log(request);
   request.open('POST', apiURL, true);
-  request.setRequestHeader("Authorization", authorization);
   request.setRequestHeader("Content-Type", 'application/json');
+  request.setRequestHeader("Authorization", authorization);
   request.send(JSON.stringify(data));
 }

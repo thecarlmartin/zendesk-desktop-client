@@ -20,7 +20,7 @@ function zendeskOAuth() {
   // Zendesk Application credentials
   var options = {
       client_id: 'desktop_support',
-      client_secret: 'cd4669093075abdce1bd997953983885a75b8a9d35eb44d22179f6e304a9ceb5',
+      client_secret: '2c2c2aeaa95e951ce62abaaf445685c282bfc42d41aee520a3270f3e279cb52d',
       scope: "read%20write", // Scopes limit access for OAuth tokens.
       redirectURI: 'https://physiotherapiemartin.de'
   };

@@ -21,5 +21,8 @@ function initiateViews() {
 
 function closeWindow() {
   var window = remote.getCurrentWindow();
+  window.on('close', function() {
+      window = null;
+  }, false);
   window.close();
 }

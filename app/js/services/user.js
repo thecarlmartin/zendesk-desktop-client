@@ -5,7 +5,7 @@ function logout() {
   localStorage.removeItem('userEmail');
   localStorage.removeItem('userName');
   localStorage.removeItem('userID');
-  hideEverything(true);
+  hideEverything(false);
   loading(false, '');
   $('.login').fadeIn("slow");
 }

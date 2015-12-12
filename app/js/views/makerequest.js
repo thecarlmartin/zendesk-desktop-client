@@ -56,13 +56,13 @@ function createTicket() {
 
   //Creating a Zendesk Ticket
   loading(true, 'Wir übermitteln Ihre Anfrage');
-  var data = { request: {
+  var data = {request: {
     subject: subject,
     comment: {body: comment},
     requester_id: requester_id,
     status: 'new'
   }};
-
+  console.log(data);
   var apiURL = '.zendesk.com/api/v2/requests.json';
   zendeskAPIPost(apiURL, data, handleCreatedTicket);
 
