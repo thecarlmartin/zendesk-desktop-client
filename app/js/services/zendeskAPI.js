@@ -1,9 +1,13 @@
-function zendeskAPICall(api, callbackFunction) {
+function zendeskAPICall(api, callbackFunction, parameters) {
   var request = new XMLHttpRequest();
   var zendeskSubdomain = localStorage.getItem('subdomain');
   var apiURL = 'https://' + zendeskSubdomain + api;
   var authorization = 'Bearer ' + localStorage.getItem('code');
-  console.log(authorization);
+
+  if (parameters != null) {
+    var encodedParameters = $.param(parameters);
+    apiURL += '?' + encodedParameters;
+  }
 
   request.onreadystatechange = function() {
     if(request.readyState == 4 && request.status == 200) {
@@ -17,6 +21,7 @@ function zendeskAPICall(api, callbackFunction) {
 
   request.open('GET', apiURL, true);
   request.setRequestHeader("Authorization", authorization);
+  request.setRequestHeader('Content-Type', 'application/json; charset=utf-8');
   request.send();
 }
 

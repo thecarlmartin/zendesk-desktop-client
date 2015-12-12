@@ -6,35 +6,43 @@ $(document).ready(function() {
 });
 
 function startSearch () {
-  localStorage.setItem('searchSuccess', false);
   var searchInput = document.getElementById("search-box").value;
+  //Saving Search for later use by View Controller
   localStorage.setItem('searchQuery', searchInput);
+  localStorage.setItem('searchSuccess', false);
+
   if (searchInput !== "") {
+    //Starting Search
+    var api = ".zendesk.com/api/v2/help_center/articles/search.json";
+    var parameters = {query: searchInput};
+    zendeskAPICall(api, displayHelpCenterCards, parameters)
+
+    //Reset UI
     loading(true, 'Wir durchsuchen unser Help Center nach Lösungen.');
     hideEverything(true);
     document.getElementById("search-box").value = "";
-    searchHelpCenter(searchInput);
   } else {
+    //Shake search field to indicate a value has to be entered
     $('#search-box').addClass("shake");
     $('#search-box').on("webkitAnimationEnd", function() {$(this).removeClass("shake")});
   }
 }
 
-//Initiates the API Call
-function searchHelpCenter (searchString) {
-  var api = ".zendesk.com/api/v2/help_center/articles/search.json?query=" + searchString
-  zendeskAPICall(api, displayHelpCenterCards)
-}
-
 //Executes once the API Query has finished and builds the search results view
 function displayHelpCenterCards(response) {
   var articles = response.results;
+  var articleCount = articles.length;
   localStorage.setItem('searchResults', JSON.stringify(articles));
-  articleCount = articles.length;
+
+  //Check if Search has returned any results
   if (articleCount > 0) {
+
+    //Display only the five most relevant Articles
     if(articleCount > 5) {
       articleCount = 5;
     }
+
+    //Displaying Article Cards
     var searchResultsCard = '<p id="search-results-description">Wir haben einige Lösungsvorschläge gefunden:</p>';
 
     for(i = 0; i < articleCount; i += 1) {
@@ -47,18 +55,26 @@ function displayHelpCenterCards(response) {
         '</a>'
         ].join('');
     }
+
+    //Saving Search Success for later use by View Controller
     localStorage.setItem('searchSuccess', true);
+
+    //Insert Article Cards HTML
     $('div.search-results-insert').html(searchResultsCard);
+
   } else {
+
+    //Executed if Search unsuccesful, or if no Articles are found
     startTicket();
     localStorage.setItem('searchSuccess', false);
     return;
   }
+
   loading(false, '')
   $('.search-completed, #header-main').fadeIn();
 }
 
-//Displays the Help Center articles
+//Display Article Body
 function displayArticle(id) {
   $('.search-results-insert').hide();
   var articlesArray = JSON.parse(localStorage.getItem('searchResults'));
@@ -68,7 +84,7 @@ function displayArticle(id) {
     '<h2>' + articlesArray[id].name + '</h2>',
     '<a href="#" onclick="hideArticle()">Schließen</a>',
     '<p>' + articlesArray[id].body + '</p>'
-  ].join('');
+    ].join('');
 
   $('.article-insert').toggleClass('article-insert-style');
   $('.article-insert').html(articlesHTML);

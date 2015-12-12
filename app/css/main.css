@@ -537,6 +537,73 @@ MAKE REQUEST
   display: inline-block;
   padding: 20px 5px 0 0;
 }
+
+/*****************
+RECORDED REQUESTS
+******************/
+
+.requests {
+  position: fixed;
+  display: block;
+  top: 12%;
+  left: 10%;
+  width: 80vw;
+  height: 80%;
+  overflow: scroll;
+}
+
+#request-list-description {
+  color: white;
+  margin-bottom: 10px;
+}
+
+.request-card {
+  -webkit-filter: drop-shadow(1px 1px 4px rgba(0, 0, 0, 0) );
+  -webkit-transition: 0.2s ease-in-out;
+  display: block;
+  background-color: white;
+  padding: 1%;
+  margin-bottom: 15px;
+  box-shadow: 0px 1px 4px 0px rgba(0,0,0,0.20);
+}
+
+.request-card:hover {
+  -webkit-filter: drop-shadow(1px 1px 4px rgba(0, 0, 0, 0.4) );
+}
+
+.request-card h2 {
+  display: inline-block;
+  white-space: nowrap;
+  float: left;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  width: 90%;
+}
+
+.request-status {
+  display: inline;
+  float: right;
+  width: 10%;
+  margin: 0.3em 0 0.3em;
+  text-align: right;
+  height: 1.7em;
+}
+
+.request-solved {
+  border-left: solid 10px #8DD9AE;
+}
+
+.request-solved .request-status {
+  color: #8DD9AE;
+}
+
+.request-open {
+  border-left: solid 10px #d47581;
+}
+
+.request-open .request-status {
+  color: #d47581;
+}
 /*****************
 LOADING
 ******************/
