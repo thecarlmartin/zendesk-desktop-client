@@ -9,30 +9,37 @@ function fetchRequests() {
 
 function displayRequests(response) {
   var requests = response.requests;
-  var requestCard = '<p id="request-list-description">Folgende Anfragen haben Sie uns bereits gestellt:</p>';
-  var status = '';
-  var statusClass ='';
+  var requestCard = '';
 
-  for(i = 0; i < requests.length; i +=1) {
-    //Determine Request status
-    status = requests[i].status;
-    if(status === 'solved' || status === 'closed') {
-      statusClass = 'request-solved';
-      status = 'Gelöst';
-    } else {
-      statusClass = 'request-open';
-      status = 'Offen';
+  if(requests.length > 1) {
+    requestCard += '<p id="request-list-description">Folgende Anfragen haben Sie uns bereits gestellt:</p>';
+    var status = '';
+    var statusClass ='';
+
+
+
+    for(i = 0; i < requests.length; i +=1) {
+      //Determine Request status
+      status = requests[i].status;
+      if(status === 'solved' || status === 'closed') {
+        statusClass = 'request-solved';
+        status = 'Gelöst';
+      } else {
+        statusClass = 'request-open';
+        status = 'Offen';
+      }
+
+      requestCard += [
+        '<a href="#" onclick="openRequest(' + i + ')" class="request-card ' + statusClass + '">',
+            '<h2>' + requests[i].subject + '</h2>',
+            '<p class="request-status">' + status + '</p>',
+            '<span><p class="request-description">' + requests[i].description + '</p></span>',
+        '</a>'
+      ].join('');
     }
-
-    requestCard += [
-      '<a href="#" onclick="openRequest(' + i + ')" class="request-card ' + statusClass + '">',
-          '<h2>' + requests[i].subject + '</h2>',
-          '<p class="request-status">' + status + '</p>',
-          '<span><p class="request-description">' + requests[i].description + '</p></span>',
-      '</a>'
-    ].join('');
+  } else {
+    requestCard += '<p id="request-list-description">Sie haben noch keine Anfragen gestellt.</p>'
   }
-
   $('.requests').html(requestCard);
   loading(false, '');
   $('.requests').show();
