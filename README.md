@@ -1,9 +1,15 @@
-# ZendeskDesktopSupport
-I'm developing this app to learn JavaScript.
-I'm building this app on top of the electron framework.
+# Desktop Support
+The purpose of this app is to simplify access to internal Help Desk resources from Zendesk.
 
-This app will allow the employees of a small business access a Zendesk Help Center and submit tickets directly from their desktops.
+Current Features include:
+* Zendesk OAuth authentication
+* Search Help Center first, before creating a new ticket.
+* Creating a new ticket without having the user reenter any personal information like name or email
+* Overview of recent tickets
 
-#Stored Items
-- Zendesk OAuth token ('code')
-- Stay Signed in decision ('staySignedIn')
+Planned Features include:
+* See comment history
+* Add new comments to tickets
+* Desktop Notification, when new comments are added to a ticket
+
+I'm building this app for a small business on my personal time to learn Web Technologies and the Electron Framework.
