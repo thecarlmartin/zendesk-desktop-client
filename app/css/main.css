@@ -63,17 +63,6 @@ table tbody tr td {
 ::-webkit-input-placeholder { /* WebKit, Blink, Edge */
     color:    #FFF;
 }
-:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
-   color:    #FFF;
-   opacity:  1;
-}
-/*::-moz-placeholder { /* Mozilla Firefox 19+ */*/
-   color:    #FFF;
-   opacity:  1;
-}
-:-ms-input-placeholder { /* Internet Explorer 10-11 */
-   color:    #FFF;
-}
 
 input[type=text], textarea {
   -webkit-transition: all 0.15s ease-in-out;
@@ -82,7 +71,7 @@ input[type=text], textarea {
   -o-transition: all 0.15s ease-in-out;
   outline: none;
   padding: 3px 0px 3px 3px;
-  margin: 5px 1px 3px 0px;
+  margin: 5px 1px 3px 0;
   border: 1px solid #DDDDDD;
 }
 
@@ -101,7 +90,7 @@ HEADER
 
 #home {
   position: fixed;
-  padding-top: 2px;
+  margin-top: 2px;
   top: 0.6vw;
   left: 10%;
   width: 2vw;
@@ -240,8 +229,6 @@ SEARCH
   padding: 1%;
   height: 3.5vw;
   width: 3.5vw;
-  -ms-transform: rotate(45deg); /* IE 9 */
-  -webkit-transform: rotate(45deg); /* Chrome, Safari, Opera */
   transform: rotate(45deg);
 }
 
