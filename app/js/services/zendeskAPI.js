@@ -10,11 +10,11 @@ function zendeskAPICall(api, callbackFunction, parameters) {
   }
 
   request.onreadystatechange = function() {
-    if(request.readyState == 4 && request.status == 200) {
+    if(request.readyState === 4 && request.status === 200) {
       var response = JSON.parse(request.responseText);
       callbackFunction(response);
       return;
-    } else if(request.readyState == 4 && request.status !== 200) {
+    } else if(request.readyState === 4 && request.status !== 200) {
       callbackFunction('error');
     }
   }
@@ -32,8 +32,8 @@ function zendeskAPIPost(api, data, callbackFunction, type) {
   var authorization = 'Bearer ' + localStorage.getItem('code');
 
   request.onreadystatechange = function() {
-    if(request.readyState == 4) {
-      if(request.status == 201 || request.status == 200) {
+    if(request.readyState === 4) {
+      if(request.status === 201 || request.status == 200) {
         var response = JSON.parse(request.responseText);
         callbackFunction(response);
         return;
