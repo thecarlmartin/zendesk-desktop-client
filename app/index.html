@@ -16,7 +16,8 @@
     <!-- Importing Views -->
     <script src="js/views/login.js"></script>
     <script src="js/views/search.js"></script>
-    <script src="js/views/makerequest.js"></script>
+    <script src="js/views/requests.js"></script>
+    <script src="js/views/ticket.js"></script>
 
     <!-- Importing JavaScript Main Files -->
     <script src="js/viewController.js"></script>
@@ -113,10 +114,20 @@
       </form>
     </div>
 
+    <!-- Requests Overview -->
+    <div class="requests">
+        <!-- Recent Requests are inserted here -->
+    </div>
+
+    <!-- Request Comment View -->
+    <div class="request-comments">
+
+    </div>
+
     <!-- Top Navigation -->
     <header class="header drag-area" id='header-main'>
       <a href="#" onclick="leaveSearchResults();"alt="Home"><img src="img/home-icon.svg" alt="Go Home" id="home"></a>
-      <!-- <a href="#" alt="Anfragen" id="requests">Anfragen</a> -->
+      <a href="#" alt="Anfragen" id="requests" onclick="fetchRequests();">Anfragen</a>
       <a href="#" alt="Anfragen" id="close-app" onclick="closeWindow();"><img src="img/x.svg" alt="Close App"></a>
     </header>
 

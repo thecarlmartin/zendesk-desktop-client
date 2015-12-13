@@ -64,7 +64,7 @@ function createTicket() {
   }};
   console.log(data);
   var apiURL = '.zendesk.com/api/v2/requests.json';
-  zendeskAPIPost(apiURL, data, handleCreatedTicket);
+  zendeskAPIPost(apiURL, data, handleCreatedTicket, 'POST');
 
 }
 
