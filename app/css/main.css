@@ -61,7 +61,7 @@ table tbody tr td {
 
 /* CHANGING PLACEHOLDER TEXT FOR ALL BROWSERS */
 ::-webkit-input-placeholder { /* WebKit, Blink, Edge */
-    color:    #FFF;
+    color: white;
 }
 
 input[type=text], textarea {
@@ -596,6 +596,10 @@ RECORDED REQUESTS
 /*****************
 REQUEST COMMENTS
 ******************/
+
+::-webkit-input-placeholder { /* WebKit, Blink, Edge */
+    color: #4A90E2;
+}
 
 .request-comments {
   display: block;
