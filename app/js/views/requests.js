@@ -107,7 +107,7 @@ function displayRequestComments(response) {
     '</div>',
     '<form class="comment-new">'
   ].join('');
-  commentsHTML += '<textarea id="comment-new-textarea" rows="10" cols="1" placeholder="Text"></textarea>';
+  commentsHTML += '<textarea id="comment-new-textarea" rows="10" cols="1" placeholder="Geben Sie hier weitere Details zu Ihrer Anfrage ein. Ein Mitglied unseres Supportteams wird umgehend antworten."></textarea>';
   commentsHTML += [
       '<a href="#" alt="Send Comment" onclick="sendComment(); return false;">',
         '<p>Senden</p>',
@@ -139,7 +139,7 @@ function sendComment() {
 }
 
 function handleCommentSent(response) {
-  loading(flase, '');
+  loading(false, '');
   hideEverything(true);
   doneAnimation();
 }

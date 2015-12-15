@@ -13,7 +13,7 @@ app.on('ready', function() {
         minHeight: 600,
         minWidth: 800
     });
-    mainWindow.openDevTools();
+    // mainWindow.openDevTools();
     mainWindow.loadURL('file://' + __dirname + '/app/index.html');
 });
 

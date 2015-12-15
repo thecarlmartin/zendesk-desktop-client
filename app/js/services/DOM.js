@@ -25,7 +25,7 @@ function loading(show, description) {
       $('#loading-description').text(description);
     }
   } else {
-    $('.loading').fadeOut("slow");
+    $('.loading').hide();
   }
 }
 
