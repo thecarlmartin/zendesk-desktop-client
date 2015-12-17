@@ -6,10 +6,10 @@ Current Features include:
 * Search Help Center first, before creating a new ticket.
 * Creating a new ticket without having the user reenter any personal information like name or email
 * Overview of recent tickets
-
-Planned Features include:
 * See comment history
 * Add new comments to tickets
+
+Planned Features include:
 * Desktop Notification, when new comments are added to a ticket
 
 I'm building this app for a small business on my personal time to learn Web Technologies and the Electron Framework.
