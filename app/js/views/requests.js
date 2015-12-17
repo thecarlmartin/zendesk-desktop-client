@@ -54,7 +54,7 @@ function openRequest(i) {
   var requestSubject = requests[i].subject;
   localStorage.setItem('requestSubject', requestSubject);
   localStorage.setItem('requestID', requestID);
-
+  localStorage.setItem('requestIndex', i);
 }
 
 function displayRequestComments(response) {
@@ -140,6 +140,5 @@ function sendComment() {
 
 function handleCommentSent(response) {
   loading(false, '');
-  hideEverything(true);
-  doneAnimation();
+  openRequest(localStorage.getItem('requestIndex'));
 }

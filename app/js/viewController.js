@@ -1,7 +1,7 @@
 var remote = require('remote');
+var BrowserWindow = remote.require('browser-window');
 
 $(document).ready(function() {
-
   if(localStorage.getItem('staySignedIn') !== 'true') {
     logout();
   } else {

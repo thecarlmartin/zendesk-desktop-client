@@ -1,26 +1,38 @@
-//Document Functions
-function removeCookie(window, cookie) {
-    var url = "http" + (cookie.secure ? "s" : "") + "://" + cookie.domain + cookie.path;
-    window.webContents.session.cookies.remove({
-            "url": url,
-            "name": cookie.name
-        },
-        function(error) {
-            if (error) throw error;
-        });
-}
-
 //Require Browser Module
 var remote = require('remote');
 var BrowserWindow = remote.require('browser-window');
 
+
+
+function removeCookies(appWindow, close) {
+  appWindow.webContents.session.cookies.get({}, function(error, cookies) {
+    if (error) throw error;
+    for (var i = cookies.length - 1; i >= 0; i--) {
+      var url = "http" + (cookies[i].secure ? "s" : "") + "://" + cookies[i].domain + cookies[i].path;
+      appWindow.webContents.session.cookies.remove({
+              "url": url,
+              "name": cookies[i].name
+          },
+          function(error) {
+              if (error) throw error;
+          });
+    };
+    if (close === 'true') {
+      appWindow.close();
+    }
+  });
+}
+
+
+
 function zendeskOAuth() {
 
   loading(true, '');
+
   // Zendesk Application credentials
   var options = {
       client_id: 'desktop_support',
-      client_secret: '2c2c2aeaa95e951ce62abaaf445685c282bfc42d41aee520a3270f3e279cb52d',
+      client_secret: '7632ff63f7e706fdf395fc014ec35541ab7cd34a8075e00a2598d2614ca654f6', //For security reasons I omitted the client secret
       scope: "read%20write", // Scopes limit access for OAuth tokens.
       redirectURI: 'https://physiotherapiemartin.de'
   };
@@ -37,7 +49,7 @@ function zendeskOAuth() {
   localStorage.setItem('staySignedIn', staySignedInDecision);
   console.log('Stay Signed in: ' + localStorage.getItem('staySignedIn'));
 
-  // Build the OAuth consent page URL
+  // Build the OAuth Consent Window
   var authWindow = new BrowserWindow({
       height: 800,
       width: 600,
@@ -45,16 +57,12 @@ function zendeskOAuth() {
       alwaysOnTop: true
   });
 
+  //Build OAuth URL
   var zendeskURL = 'https://' + zendeskSubdomain + '.zendesk.com/oauth/authorizations/';
   var authUrl = zendeskURL + 'new?response_type=code&redirect_uri=' + options.redirectURI + '&client_id=' + options.client_id + '&scope=' + options.scope;
-  //Remove Zendesk Cookies
-  authWindow.webContents.session.cookies.get({}, function(error, cookies) {
-    if (error) throw error;
-    for (var i = cookies.length - 1; i >= 0; i--) {
-        removeCookie(authWindow, cookies[i])
-    };
-  });
-  authWindow.loadUrl(authUrl);
+
+  removeCookies(authWindow, 'false');
+  authWindow.loadURL(authUrl);
   authWindow.show();
 
   // Handle the response from Zendesk
@@ -65,8 +73,9 @@ function zendeskOAuth() {
       error = /\?error=(.+)$/.exec(newUrl);
 
     if (code || error) {
-      // Close the browser if code found or error
-      authWindow.close();
+      //Removes Cookies and closes the Window
+      removeCookies(authWindow, 'true');
+
     }
 
     // If there is a code in the callback, proceed to get token from Zendesk

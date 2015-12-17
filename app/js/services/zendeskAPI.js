@@ -1,3 +1,6 @@
+var remote = require('remote');
+var BrowserWindow = remote.require('browser-window');
+
 function zendeskAPICall(api, callbackFunction, parameters) {
   var request = new XMLHttpRequest();
   var zendeskSubdomain = localStorage.getItem('subdomain');
@@ -26,7 +29,7 @@ function zendeskAPICall(api, callbackFunction, parameters) {
 }
 
 function zendeskAPIPost(api, data, callbackFunction, type) {
-  var request = new XMLHttpRequest();
+  var request = new XMLHttpRequest({withCredentials: false});
   var zendeskSubdomain = localStorage.getItem('subdomain');
   var apiURL = 'http://' + zendeskSubdomain + api;
   var authorization = 'Bearer ' + localStorage.getItem('code');
@@ -44,7 +47,7 @@ function zendeskAPIPost(api, data, callbackFunction, type) {
       }
     }
   }
-  console.log(request);
+
   request.open(type, apiURL, true);
   request.setRequestHeader("Content-Type", 'application/json');
   request.setRequestHeader("Authorization", authorization);

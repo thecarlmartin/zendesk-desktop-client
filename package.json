@@ -7,6 +7,7 @@
     "package": "electron-packager ./ DesktopSupport --all --out ~/Desktop/Zendesk --version=0.35.1 --overwrite --icon=./app/img/app-icon.icns"
   },
   "devDependencies": {
+    "electron-cookies": "^1.1.0",
     "electron-packager": "^5.1.1",
     "electron-prebuilt": "^0.35.1",
     "jquery-placeholder": "^2.1.1"

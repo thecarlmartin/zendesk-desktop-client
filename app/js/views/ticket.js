@@ -62,15 +62,12 @@ function createTicket() {
     requester_id: requester_id,
     status: 'new'
   }};
-  console.log(data);
   var apiURL = '.zendesk.com/api/v2/requests.json';
   zendeskAPIPost(apiURL, data, handleCreatedTicket, 'POST');
 
 }
 
 function handleCreatedTicket(response) {
-  console.log(response);
-  alert('Created Ticket');
   loading(false, '');
   doneAnimation();
 }

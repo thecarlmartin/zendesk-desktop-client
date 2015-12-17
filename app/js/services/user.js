@@ -1,10 +1,5 @@
 function logout() {
-  localStorage.removeItem('code');
-  localStorage.removeItem('staySignedIn');
-  localStorage.removeItem('subdomain');
-  localStorage.removeItem('userEmail');
-  localStorage.removeItem('userName');
-  localStorage.removeItem('userID');
+  localStorage.clear();
   hideEverything(false);
   loading(false, '');
   $('.login').fadeIn("slow");
