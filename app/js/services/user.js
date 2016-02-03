@@ -3,6 +3,7 @@ function logout() {
   hideEverything(false);
   loading(false, '');
   $('.login').fadeIn("slow");
+  localStorage.setItem('lastRead', JSON.stringify({}));
 }
 
 function requestUserInfo() {

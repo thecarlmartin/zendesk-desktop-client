@@ -47,7 +47,6 @@ function zendeskOAuth() {
   //Store value of Signed in Checkbox
   var staySignedInDecision = document.getElementById("staySignedIn").checked;
   localStorage.setItem('staySignedIn', staySignedInDecision);
-  console.log('Stay Signed in: ' + localStorage.getItem('staySignedIn'));
 
   // Build the OAuth Consent Window
   var authWindow = new BrowserWindow({

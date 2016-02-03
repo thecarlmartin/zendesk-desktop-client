@@ -1,20 +1,42 @@
 function fetchRequests() {
+  var hiddenLoad = localStorage.getItem('hiddenLoad');
   var requester_id = localStorage.getItem('userID');
   var parameters = {sort_by: 'updated_at', sort_order: 'desc'}
   var api = '.zendesk.com/api/v2/users/' + requester_id + '/requests.json';
-  zendeskAPICall(api, displayRequests, parameters);
-  loading(true, 'Wir rufen Ihre Anfragen ab.');
-  hideEverything(false);
+  zendeskAPICall(api, saveRequests, parameters);
+  if(hiddenLoad != 'true') {
+    loading(true, 'Wir rufen Ihre Anfragen ab.');
+    hideEverything(false);
+  } else {
+    localStorage.setItem('hiddenLoad', 'false');
+  }
 }
 
-function displayRequests(response) {
+function saveRequests(response) {
   var requests = response.requests;
+  var display = localStorage.getItem('displayRequests');
+  var notify = localStorage.getItem('notifyUser');
+  localStorage.setItem('requestsObject', JSON.stringify(requests));
+  if(display != 'false') {
+    displayRequests();
+    localStorage.setItem('displayRequests', 'true');
+  }
+  if(notify === 'true') {
+    notifyUser();
+    localStorage.setItem('notifyUser', 'false');
+    localStorage.setItem('displayRequests', 'true');
+  }
+}
+
+function displayRequests() {
+  var requests = JSON.parse(localStorage.getItem('requestsObject'));
   var requestCard = '';
 
   if(requests.length > 1) {
-    requestCard += '<p id="request-list-description">Folgende Anfragen haben Sie uns bereits gestellt:</p>';
+    requestCard += '<p id="request-list-description">Folgende Anfragen haben Sie uns bereits gestellt. Gelöste Anfragen sind grün markiert.</p>';
     var status = '';
     var statusClass ='';
+    var readClass = '';
 
     for(i = 0; i < requests.length; i +=1) {
       //Determine Request status
@@ -27,14 +49,22 @@ function displayRequests(response) {
         status = 'Offen';
       }
 
+      //Check if request has been read
+      var readStatus = checkIfRead(i);
+      if(readStatus === 'read') {
+        var readText = 'Gelesen';
+      } else {
+        var readText = 'Ungelesen';
+      }
+
       requestCard += [
         '<a href="#" onclick="openRequest(' + i + ')" class="request-card ' + statusClass + '">',
-            '<h2>' + requests[i].subject + '</h2>',
-            '<p class="request-status">' + status + '</p>',
-            '<span><p class="request-description">' + requests[i].description + '</p></span>',
+          '<h2>' + requests[i].subject + '</h2>',
+          '<p class="request-status ' + readStatus + '">' + readText + '</p>',
+          '<span><p class="request-description">' + requests[i].description + '</p></span>',
         '</a>'
       ].join('');
-      localStorage.setItem('requestsObject', JSON.stringify(requests));
+
     }
   } else {
     requestCard += '<p id="request-list-description">Sie haben noch keine Anfragen gestellt.</p>'
@@ -42,6 +72,59 @@ function displayRequests(response) {
   $('.requests').html(requestCard);
   loading(false, '');
   $('.requests').show();
+  $("#requests").text("Anfragen (" + countUnread() + ")")
+}
+
+function checkIfRead(index) {
+  //Determine, if request has been read since updated
+  var lastRead = JSON.parse(localStorage.getItem('lastRead'));
+  var requests = JSON.parse(localStorage.getItem('requestsObject'));
+  var requestId = requests[index].id;
+
+  var lastReadAt = null;
+  if(lastRead[requestId] === undefined) {
+    return 'unread';
+  } else {
+    var readDate = new Date(lastRead[requestId])
+    var updateDate = new Date(requests[index].updated_at)
+    if(readDate.getTime() >= updateDate.getTime()) {
+      return 'read';
+    } else {
+      return 'unread';
+    }
+  }
+}
+
+function countUnread() {
+  var count = 0
+  var requests = JSON.parse(localStorage.getItem('requestsObject'));
+  for (var i = 0; i < requests.length; i++) {
+    var status = checkIfRead(i);
+    if(status === 'unread') {
+      count += 1;
+    }
+  }
+  return count;
+}
+
+function checkForUpdates() {
+  localStorage.setItem('hiddenLoad', 'true');
+  localStorage.setItem('notifyUser', 'true');
+  localStorage.setItem('displayRequests', 'false');
+  fetchRequests();
+}
+
+function notifyUser() {
+  var unread = countUnread();
+  if(unread > 0) {
+    var myNotification = new Notification('Praxissupport', {
+      body: 'Sie haben neue ungelesene Nachrichten von unserem Support Team'
+    });
+
+    myNotification.onclick = function () {
+      fetchRequests();
+    }
+  }
 }
 
 function openRequest(i) {
@@ -67,8 +150,6 @@ function displayRequestComments(response) {
   var cssComment = '';
 
   hideEverything(false);
-  console.log(subject);
-  console.log(comments.length);
   var commentsHTML = [
     '<h2 class="request-comments-subject">' + subject + '</h2>',
     '<a href="#" alt="Go Back" onclick="returnToRequests(); return false;" id="back-button-comments">',
@@ -94,7 +175,6 @@ function displayRequestComments(response) {
         }
       }
     }
-    console.log(comments[i].body);
     commentsHTML += [
       '<p class="' + cssName + '">' + userName + '</p>',
       '<div class="' + cssComment + '">',
@@ -117,11 +197,17 @@ function displayRequestComments(response) {
 
   $('.request-comments').html(commentsHTML);
   $('.request-comments').show();
+
+  var requestId = localStorage.getItem('requestID');
+  var currentTime = new Date().getTime();
+  var lastRead = JSON.parse(localStorage.getItem('lastRead'));
+  lastRead[requestId] = currentTime;
+  localStorage.setItem('lastRead', JSON.stringify(lastRead));
 }
 
 function returnToRequests() {
   hideEverything(false);
-  $('.requests').show();
+  displayRequests();
 }
 
 function sendComment() {

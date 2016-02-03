@@ -52,7 +52,7 @@
     <div class="search-feature">
       <img src="img/help-icon.svg" alt="help-icon" class="retina" id="help-icon">
       <form onsubmit="startSearch();return false;">
-        <input type="text" name="problem-description" placeholder="Wie können wir Ihnen helfen?" id="search-box">
+        <input type="text" name="problem-description" placeholder="Wie können wir Ihnen helfen?" id="search-box" autofocus="autofocus">
       </form>
       <a alt="Start Search" onclick="startSearch()"><img src="img/arrow-right.svg" alt="Start Search" id="search-arrow"></a>
     </div>
@@ -61,13 +61,13 @@
     <div id="login-center">
       <div class="login">
         <h1>Willkommen</h1>
-        <p>Damit wir Ihnen schneller helfen können, müssen Sie sich anmelden. Geben Sie dazu die Zendesk Subdomain ein.</p>
+        <p>Bitte melden Sie sich mit Ihrem Zendesk Account an. Geben Sie dazu bitte die Zendesk Subdomain Ihrer Organisation ein. Falls Sie diese nicht wissen sollten, kontaktieren Sie bitte Ihren Administrator.</p>
         <form onsubmit="zendeskOAuth();return false;">
           <p id="subdomain-textabove">Zendesk Subdomain:</p>
           <input type="text" placeholder="beispiel" id="subdomain-field">
           <p id="subdomain-completion">.zendesk.com</p>
           <div>
-            <input type="checkbox" name="stay-signed-in" value="Angemeldet bleiben" id="staySignedIn">
+            <input type="checkbox" name="stay-signed-in" value="Angemeldet bleiben" id="staySignedIn" checked>
             <p>Angemeldet bleiben</p>
           </div>
           <button type="button" onclick="zendeskOAuth()" name="submit" value="Anmelden">Anmelden</>
@@ -126,8 +126,8 @@
 
     <!-- Top Navigation -->
     <header class="header drag-area" id='header-main'>
-      <a href="#" onclick="leaveSearchResults();"alt="Home"><img src="img/home-icon.svg" alt="Go Home" id="home"></a>
-      <a href="#" alt="Anfragen" id="requests" onclick="fetchRequests();">Anfragen</a>
+      <a href="#" onclick="leaveSearchResults();"alt="Home" id="home"><img src="img/home-icon.svg" alt="Go Home">Home</a>
+      <a href="#" alt="Anfragen" id="requests" onclick="fetchRequests(); localStorage.setItem('displayRequests', 'true');">Anfragen</a>
       <a href="#" alt="Anfragen" id="close-app" onclick="closeWindow();"><img src="img/x.svg" alt="Close App"></a>
     </header>
 

@@ -11,7 +11,8 @@ app.on('ready', function() {
         width: 900,
         frame: false,
         minHeight: 600,
-        minWidth: 800
+        minWidth: 800,
+        devTools: true
     });
     // mainWindow.openDevTools();
     mainWindow.loadURL('file://' + __dirname + '/app/index.html');

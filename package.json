@@ -13,6 +13,7 @@
     "jquery-placeholder": "^2.1.1"
   },
   "dependencies": {
-    "nconf": "^0.7.2"
+    "nconf": "^0.7.2",
+    "nw-notify": "^1.0.2"
   }
 }
