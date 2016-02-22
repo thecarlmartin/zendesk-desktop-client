@@ -12,7 +12,7 @@ app.on('ready', function() {
         frame: false,
         minHeight: 600,
         minWidth: 800,
-        devTools: true
+        devTools: false
     });
     // mainWindow.openDevTools();
     mainWindow.loadURL('file://' + __dirname + '/app/index.html');

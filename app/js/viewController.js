@@ -14,7 +14,6 @@ function initiateViews() {
   if(localStorage.getItem('code') != null) {
     $('.search-feature, .header, .footer').fadeIn("slow");
     $("#search-box").focus();
-    $("#requests").text("Anfragen (" + countUnread() + " neu)")
   } else {
     logout();
     return;
@@ -29,4 +28,4 @@ function closeWindow() {
   window.close();
 }
 
-var checkUpdates = setInterval(checkForUpdates, 10000);
+var checkUpdates = setInterval(checkForUpdates, 900000);

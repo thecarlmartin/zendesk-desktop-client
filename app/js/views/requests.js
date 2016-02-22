@@ -1,9 +1,13 @@
+// This package manages the handling of all requests for a given user, inlcuding displaying their history
+
+//This function calls the zendeskAPICall
 function fetchRequests() {
   var hiddenLoad = localStorage.getItem('hiddenLoad');
   var requester_id = localStorage.getItem('userID');
   var parameters = {sort_by: 'updated_at', sort_order: 'desc'}
   var api = '.zendesk.com/api/v2/users/' + requester_id + '/requests.json';
   zendeskAPICall(api, saveRequests, parameters);
+  //If this function has been invoked automatically open requests are not shown automatically to the user
   if(hiddenLoad != 'true') {
     loading(true, 'Wir rufen Ihre Anfragen ab.');
     hideEverything(false);
@@ -12,6 +16,7 @@ function fetchRequests() {
   }
 }
 
+//Once the API Call is completed, the following function handles the response based on previously defined parameters
 function saveRequests(response) {
   var requests = response.requests;
   var display = localStorage.getItem('displayRequests');
@@ -21,6 +26,7 @@ function saveRequests(response) {
     displayRequests();
     localStorage.setItem('displayRequests', 'true');
   }
+  //The user is notified about new request, when the user invoked the function directly
   if(notify === 'true') {
     notifyUser();
     localStorage.setItem('notifyUser', 'false');
@@ -28,6 +34,7 @@ function saveRequests(response) {
   }
 }
 
+//This function creates the necessary HTML and inserts it in index.html
 function displayRequests() {
   var requests = JSON.parse(localStorage.getItem('requestsObject'));
   var requestCard = '';
@@ -72,7 +79,23 @@ function displayRequests() {
   $('.requests').html(requestCard);
   loading(false, '');
   $('.requests').show();
-  $("#requests").text("Anfragen (" + countUnread() + ")")
+}
+
+//This functions counts all unread messages. Whether a request has been opened since it has been last updated is determined by the function checkIfRead()
+function countUnread() {
+  var count = 0
+  var requests = JSON.parse(localStorage.getItem('requestsObject'));
+  if(requests === null) {
+    return 0;
+  }
+  for (var i = 0; i < requests.length; i++) {
+    var status = checkIfRead(i);
+    if(status === 'unread') {
+      count += 1;
+    }
+  }
+  $("#requests").text("Anfragen (" + count + " neu)");
+  return count;
 }
 
 function checkIfRead(index) {
@@ -95,18 +118,6 @@ function checkIfRead(index) {
   }
 }
 
-function countUnread() {
-  var count = 0
-  var requests = JSON.parse(localStorage.getItem('requestsObject'));
-  for (var i = 0; i < requests.length; i++) {
-    var status = checkIfRead(i);
-    if(status === 'unread') {
-      count += 1;
-    }
-  }
-  return count;
-}
-
 function checkForUpdates() {
   localStorage.setItem('hiddenLoad', 'true');
   localStorage.setItem('notifyUser', 'true');
@@ -114,11 +125,12 @@ function checkForUpdates() {
   fetchRequests();
 }
 
+//This function uses Electron's API to send a native destop notification on Windows and Mac OS X
 function notifyUser() {
   var unread = countUnread();
   if(unread > 0) {
     var myNotification = new Notification('Praxissupport', {
-      body: 'Sie haben neue ungelesene Nachrichten von unserem Support Team'
+      body: 'Sie haben neue, ungelesene Nachrichten von unserem Support Team'
     });
 
     myNotification.onclick = function () {
@@ -127,6 +139,7 @@ function notifyUser() {
   }
 }
 
+//This function makes a Zendesk API Call to gather all all comments to a given request
 function openRequest(i) {
   var requests = JSON.parse(localStorage.getItem('requestsObject'));
   var requestID = requests[i].id;
@@ -140,6 +153,7 @@ function openRequest(i) {
   localStorage.setItem('requestIndex', i);
 }
 
+//Handles response from Zendesk, creates necessary HTML and inkects it into the template
 function displayRequestComments(response) {
   var subject = localStorage.getItem('requestSubject');
   var comments = response.comments;
@@ -205,11 +219,14 @@ function displayRequestComments(response) {
   localStorage.setItem('lastRead', JSON.stringify(lastRead));
 }
 
+//Linked to back button, when request is opened and handles the transition back to the request overview
 function returnToRequests() {
   hideEverything(false);
+  countUnread();
   displayRequests();
 }
 
+//Submits a new comment to Zendesk
 function sendComment() {
   loading(true, 'Wir übermitteln Ihren neuen Kommentar');
   var newComment = document.getElementById('comment-new-textarea').value;

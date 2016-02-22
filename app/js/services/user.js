@@ -23,6 +23,7 @@ function handleUserInfo (response) {
     localStorage.setItem('userName', response.user.name);
     localStorage.setItem('userEmail', response.user.email);
     $('#logout').text('Nicht ' + localStorage.getItem('userName') + '? Abmelden');
+    checkForUpdates();
     initiateViews();
     loading(false, '')
   }

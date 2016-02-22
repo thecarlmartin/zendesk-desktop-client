@@ -4,9 +4,22 @@
   "main": "./main.js",
   "scripts": {
     "start": "electron .",
-    "package": "electron-packager ./ DesktopSupport --all --out ~/Desktop/Zendesk --version=0.35.1 --overwrite --icon=./app/img/app-icon.icns"
+    "package": "electron-packager ./ DesktopSupport --all --out dist --version=0.35.1 --overwrite --icon=./app/img/app-icon.icns",
+    "package:osx": "electron-packager ./ DesktopSupport --platform=darwin --arch=x64 --out dist --version=0.35.1 --overwrite --icon=./app/img/app-icon.icns",
+    "package:win": "electron-packager ./ DesktopSupport --platform=win32 --arch=x64 --out dist --version=0.35.1 --overwrite --icon=./app/img/app-icon.ico",
+    "build:win": "npm run package:win && electron-builder dist/DesktopSupport-win32-x64 --platform=win --out=build",
+    "build:all": "npm run package:osx && npm run build:win"
+  },
+  "builder": {
+    "win" : {
+      "title" : "Desktop Support",
+      "version" : "1.0.0.0",
+      "publisher": "Carl Martin",
+      "icon" : "app/img/app-icon.ico"
+    }
   },
   "devDependencies": {
+    "electron-builder": "^2.7.2",
     "electron-cookies": "^1.1.0",
     "electron-packager": "^5.1.1",
     "electron-prebuilt": "^0.35.1",
