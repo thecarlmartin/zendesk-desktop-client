@@ -34,7 +34,7 @@ function zendeskOAuth() {
       client_id: 'desktop_support',
       client_secret: '7632ff63f7e706fdf395fc014ec35541ab7cd34a8075e00a2598d2614ca654f6', //For security reasons I omitted the client secret
       scope: "read%20write", // Scopes limit access for OAuth tokens.
-      redirectURI: 'https://physiotherapiemartin.de'
+      redirectURI: 'https://www.annett-martin.de'
   };
 
   //Check that a Zendesk Subdomain has been entered.
